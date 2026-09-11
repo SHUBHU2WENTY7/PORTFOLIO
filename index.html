@@ -216,73 +216,116 @@ img{display:block;max-width:100%;
 .sl{font-family:var(--font-m);font-size:.7rem;color:var(--fg-3);text-transform:uppercase;letter-spacing:.08em;margin-top:.35rem;}
 
 /* ═══════════════════════════════════════════════
-   PROOF OF WORK
+   PROOF OF WORK — ALL PROJECTS GRID
 ═══════════════════════════════════════════════ */
 .work{background:var(--bg);}
-/* Featured: large 2-col layout */
-.work-featured{display:flex;flex-direction:column;gap:clamp(4rem,8vw,7rem);margin-top:3.5rem;}
-.wi{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center;}
+
+/* Featured projects: large case-study layout */
+.work-list{display:flex;flex-direction:column;gap:clamp(5rem,10vw,9rem);margin-top:4rem;}
+.wi{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(2rem,5vw,5.5rem);align-items:center;}
 .wi.flip{grid-template-columns:1fr 1.15fr;}
 .wi.flip .wv{order:2;}
 @media(max-width:1024px){.wi,.wi.flip{grid-template-columns:1fr;gap:2.5rem;}.wi.flip .wv{order:unset;}}
-/* Grid: smaller cards */
-.work-grid-label{
-    font-family:var(--font-m);font-size:.75rem;color:var(--fg-2);
-    text-transform:uppercase;letter-spacing:.16em;
-    display:flex;align-items:center;gap:.8rem;
-    margin:clamp(3rem,6vw,5rem) 0 1.5rem;
+
+/* More projects: compact grid */
+.more-projects-label{
+    font-family:var(--font-m);font-size:.75rem;
+    color:var(--accent);letter-spacing:.18em;
+    text-transform:uppercase;
+    display:flex;align-items:center;gap:.75rem;
+    margin-top:clamp(4rem,8vw,7rem);
+    margin-bottom:2rem;
 }
-.work-grid-label::before,.work-grid-label::after{content:"";flex:1;height:1px;background:var(--border);}
-.work-grid{
+.more-projects-label::before{content:"";display:inline-block;width:20px;height:1px;background:var(--accent);}
+.more-projects-label::after{content:"";flex:1;height:1px;background:var(--border);}
+
+.proj-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:1.25rem;
 }
-@media(max-width:900px){.work-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:540px){.work-grid{grid-template-columns:1fr;}}
-/* Grid card */
-.wg-card{
-    position:relative;border-radius:10px;overflow:hidden;
-    border:1px solid var(--border);background:var(--bg-2);
-    display:flex;flex-direction:column;
-    transition:border-color .28s,transform .32s cubic-bezier(.16,1,.3,1),box-shadow .32s;
-    group:1;
+@media(max-width:1024px){.proj-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:580px){.proj-grid{grid-template-columns:1fr;}}
+
+/* Compact project card */
+.proj-card{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    background:var(--bg-2);
+    box-shadow:0 8px 32px rgba(0,0,0,.45);
+    transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .3s;
+    group:true;
 }
-.wg-card:hover{
-    border-color:rgba(0,255,204,.22);
-    transform:translateY(-5px);
-    box-shadow:0 20px 50px rgba(0,0,0,.55),0 0 0 1px rgba(0,255,204,.1);
+.proj-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 24px 60px rgba(0,0,0,.65),0 0 0 1px rgba(0,255,204,.12);
+    border-color:rgba(0,255,204,.2);
 }
-.wg-browser{background:var(--bg-3);border-bottom:1px solid var(--border);padding:.5rem .8rem;display:flex;align-items:center;gap:.5rem;flex-shrink:0;}
-.wg-dots{display:flex;gap:.28rem;}
-.wg-dots span{width:8px;height:8px;border-radius:50%;}
-.wg-url{flex:1;font-family:var(--font-m);font-size:.62rem;color:var(--fg-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:.18rem .65rem;}
-.wg-thumb{
-    width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:var(--bg);
+
+/* Browser chrome */
+.proj-bar{
+    background:var(--bg-3);
+    border-bottom:1px solid var(--border);
+    padding:.5rem .85rem;
+    display:flex;align-items:center;gap:.55rem;
     flex-shrink:0;
 }
-.wg-thumb iframe{
-    width:200%;height:200%;transform:scale(.5);transform-origin:top left;
+.proj-dots{display:flex;gap:.28rem;}
+.proj-dots span{width:8px;height:8px;border-radius:50%;}
+.proj-url{
+    flex:1;background:var(--bg);border:1px solid var(--border);
+    border-radius:20px;padding:.2rem .7rem;
+    font-family:var(--font-m);font-size:.6rem;
+    color:var(--fg-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+/* Iframe viewport */
+.proj-view{
+    position:relative;
+    width:100%;
+    padding-bottom:62.5%; /* 16:10 aspect */
+    overflow:hidden;
+    background:var(--bg);
+}
+.proj-view iframe{
+    position:absolute;top:0;left:0;
+    width:200%;height:200%;
+    transform:scale(.5);transform-origin:top left;
     border:none;pointer-events:none;
 }
-.wg-thumb-overlay{
+/* Hover overlay */
+.proj-overlay{
     position:absolute;inset:0;z-index:2;
-    display:flex;align-items:center;justify-content:center;
-    background:rgba(7,7,10,.25);
-    opacity:0;transition:opacity .3s;
+    background:linear-gradient(to top,rgba(7,7,10,.88) 0%,rgba(7,7,10,.3) 50%,rgba(7,7,10,0) 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:1.1rem;
+    opacity:0;
+    transition:opacity .32s ease;
 }
-.wg-card:hover .wg-thumb-overlay{opacity:1;}
-.wg-overlay-btn{
-    font-family:var(--font-m);font-size:.68rem;padding:.45rem 1rem;
-    background:rgba(7,7,10,.8);border:1px solid var(--accent);
-    color:var(--accent);border-radius:5px;backdrop-filter:blur(8px);
-    text-decoration:none;
+.proj-card:hover .proj-overlay{opacity:1;}
+.proj-overlay-title{
+    font-family:var(--font-h);font-size:clamp(.9rem,1.3vw,1.1rem);
+    font-weight:700;color:var(--fg);margin-bottom:.4rem;line-height:1.2;
 }
-.wg-info{padding:1rem 1.1rem;flex:1;display:flex;flex-direction:column;gap:.5rem;}
-.wg-name{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--fg);line-height:1.2;}
-.wg-desc{font-size:.78rem;color:var(--fg-3);line-height:1.45;}
-.wg-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.25rem;}
-.wg-tag{font-family:var(--font-m);font-size:.58rem;padding:.15rem .55rem;border:1px solid var(--border-2);border-radius:20px;color:var(--accent);background:rgba(0,255,204,.05);}
+.proj-overlay-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.75rem;}
+.proj-overlay-tag{
+    font-family:var(--font-m);font-size:.58rem;
+    padding:.15rem .5rem;
+    background:rgba(0,255,204,.12);
+    border:1px solid rgba(0,255,204,.2);
+    border-radius:20px;color:var(--accent);
+}
+.proj-visit{
+    display:inline-flex;align-items:center;gap:.35rem;
+    font-family:var(--font-m);font-size:.68rem;font-weight:600;
+    color:var(--bg);background:var(--accent);
+    padding:.42rem .9rem;border-radius:5px;
+    text-decoration:none;width:fit-content;
+    transition:opacity .2s;
+}
+.proj-visit:hover{opacity:.88;}
 .wv{
     border-radius:10px;overflow:hidden;
     border:1px solid var(--border);
@@ -331,10 +374,10 @@ img{display:block;max-width:100%;
 .w-links{display:flex;gap:1rem;flex-wrap:wrap;}
 
 /* ═══════════════════════════════════════════════
-   PROCESS SHOWCASE — BROWSER GALLERY
+   PROCESS SHOWCASE — LIVE BROWSER GALLERY
 ═══════════════════════════════════════════════ */
 .process{
-    background:var(--bg-2);
+    background:var(--bg);
     position:relative;overflow:hidden;
     border-top:1px solid var(--border);
     border-bottom:1px solid var(--border);
@@ -344,138 +387,266 @@ img{display:block;max-width:100%;
     top:-20%;left:50%;transform:translateX(-50%);
     width:120%;height:70%;
     background:
-        radial-gradient(ellipse 50% 50% at 20% 50%,rgba(0,255,204,.055) 0%,transparent 70%),
+        radial-gradient(ellipse 55% 45% at 20% 50%,rgba(0,255,204,.05) 0%,transparent 70%),
         radial-gradient(ellipse 45% 55% at 80% 30%,rgba(100,80,255,.04) 0%,transparent 70%);
     pointer-events:none;z-index:0;
 }
-.process>.wrap{position:relative;z-index:1;}
+.process > .wrap{position:relative;z-index:1;}
 
-/* Section heading */
+/* Heading overrides */
 .process .sec-h{font-size:clamp(2rem,5vw,4.5rem);margin-bottom:.75rem;}
 .process-intro{
-    font-size:clamp(.92rem,1.1vw,1.06rem);color:var(--fg-3);
-    max-width:520px;line-height:1.65;
-    margin-bottom:clamp(2rem,3.5vw,3rem);
+    font-size:clamp(.88rem,1.05vw,1.02rem);
+    color:var(--fg-3);max-width:500px;
+    line-height:1.65;
+    margin-bottom:clamp(1.75rem,3vw,2.5rem);
 }
 
-/* ── Project selector tabs ── */
+/* ── Project Selector Cards: scrollable pill row ── */
 .ps-cards{
-    display:flex;gap:.5rem;flex-wrap:wrap;
-    margin-bottom:clamp(1.5rem,3vw,2.5rem);
+    display:flex;
+    flex-wrap:wrap;
+    gap:.65rem;
+    margin-bottom:clamp(1.5rem,3vw,2.25rem);
+}
+@media(max-width:640px){
+    /* ps-cards flex-wrap handles mobile naturally */
 }
 
-/* ── Project selector tab style ── */
 .ps-card{
-    display:inline-flex;align-items:center;gap:.55rem;
-    padding:.55rem 1.1rem;
-    background:var(--bg-3);border:1px solid var(--border);border-radius:8px;
-    font-family:var(--font-m);font-size:.76rem;color:var(--fg-3);
-    cursor:pointer;transition:all .25s;white-space:nowrap;
+    position:relative;
+    display:flex;align-items:center;gap:.65rem;
+    padding:.6rem 1rem .6rem .75rem;
+    background:var(--bg-2);
+    border:1px solid var(--border);
+    border-radius:50px; /* pill shape */
+    cursor:pointer;
+    overflow:hidden;
+    flex-shrink:0;
+    transition:
+        border-color .28s ease,
+        background .28s ease,
+        transform .28s cubic-bezier(.16,1,.3,1),
+        box-shadow .28s cubic-bezier(.16,1,.3,1);
+    text-align:left;
 }
-.ps-card:hover{border-color:var(--border-2);color:var(--fg-2);}
-.ps-card.active{border-color:var(--accent);background:rgba(0,255,204,.07);color:var(--accent);}
-.ps-icon{display:flex;align-items:center;justify-content:center;width:18px;height:18px;}
-.ps-card-name{font-weight:600;}
-.ps-card-info,.ps-card-desc,.ps-card-stack,.ps-pill{display:none;}
+/* Hover glow shimmer */
+.ps-card::before{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.045) 50%,transparent 70%);
+    transform:translateX(-120%);
+    transition:transform .5s cubic-bezier(.16,1,.3,1);
+    pointer-events:none;
+}
+/* Active indicator line — left edge */
+.ps-card::after{
+    content:"";
+    position:absolute;left:0;top:0;bottom:0;
+    width:2.5px;
+    background:var(--ps-color, var(--accent));
+    transform:scaleY(0);transform-origin:bottom;
+    transition:transform .32s cubic-bezier(.16,1,.3,1);
+    border-radius:0 2px 2px 0;
+}
+.ps-card:hover{
+    border-color:var(--ps-color,rgba(0,255,204,.4));
+    background:rgba(255,255,255,.04);
+    transform:translateY(-2px);
+    box-shadow:0 8px 24px rgba(0,0,0,.4), 0 0 0 1px var(--ps-color,rgba(0,255,204,.12));
+}
+.ps-card::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.04) 50%,transparent 70%);
+    transform:translateX(-120%);
+    transition:transform .45s cubic-bezier(.16,1,.3,1);
+    pointer-events:none;
+}
+.ps-card:hover::before{transform:translateX(120%);}
+.ps-card.active{
+    border-color:var(--ps-color,var(--accent));
+    background:rgba(0,255,204,.06);
+    box-shadow:0 4px 20px rgba(0,0,0,.35), 0 0 0 1px var(--ps-color,rgba(0,255,204,.2));
+}
 
-/* ── Showcase: big browser frame ── */
-.showcase-frame{
+/* Icon inside card */
+.ps-icon{
+    width:30px;height:30px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+    color:var(--fg-3);
+    transition:background .25s,border-color .25s,color .25s;
+}
+.ps-card.active .ps-icon{
+    background:rgba(0,255,204,.12);
+    border-color:var(--ps-color,rgba(0,255,204,.35));
+    color:var(--ps-color,var(--accent));
+}
+.ps-card-info{display:flex;flex-direction:column;gap:.1rem;min-width:0;}
+.ps-card-name{
+    font-family:var(--font-m);font-size:.78rem;font-weight:600;
+    color:var(--fg-2);line-height:1.2;white-space:nowrap;
+    transition:color .25s;
+}
+.ps-card.active .ps-card-name{color:var(--ps-color,var(--accent));}
+.ps-card-desc{font-family:var(--font-m);font-size:.6rem;color:var(--fg-3);white-space:nowrap;}
+.ps-card-stack{display:flex;gap:.25rem;margin-top:.3rem;}
+.ps-pill{
+    font-family:var(--font-m);font-size:.55rem;
+    padding:.12rem .42rem;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);
+    border-radius:20px;color:var(--fg-3);white-space:nowrap;
+    transition:background .25s,border-color .25s,color .25s;
+}
+.ps-card.active .ps-pill{
+    background:rgba(0,255,204,.08);border-color:rgba(0,255,204,.18);
+    color:var(--ps-color,var(--accent));
+}
+
+/* ═══════════════════════════════════════════════
+   LIVE BROWSER WINDOW
+═══════════════════════════════════════════════ */
+.ps-browser{
     border-radius:14px;overflow:hidden;
     border:1px solid var(--border);
-    box-shadow:0 0 0 1px rgba(0,0,0,.5),0 32px 80px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.04);
-    background:var(--bg-3);
-    position:relative;
+    box-shadow:
+        0 0 0 4px rgba(0,0,0,.45),
+        0 40px 100px rgba(0,0,0,.7),
+        inset 0 1px 0 rgba(255,255,255,.04);
+    background:#0d1117;
 }
-/* Browser chrome bar */
-.sf-bar{
-    display:flex;align-items:center;gap:.7rem;
-    padding:.65rem 1rem;
+
+/* Chrome bar */
+.ps-browser-bar{
+    display:flex;align-items:center;gap:.75rem;
+    padding:0 1.1rem;height:44px;
     background:#161b22;
     border-bottom:1px solid rgba(255,255,255,.07);
+    flex-shrink:0;
 }
-.sf-dots{display:flex;gap:.35rem;}
-.sf-dot{width:11px;height:11px;border-radius:50%;}
-.sf-url{
-    flex:1;display:flex;align-items:center;gap:.5rem;
-    background:#0d1117;border:1px solid rgba(255,255,255,.08);
-    border-radius:6px;padding:.32rem .85rem;
-    font-family:var(--font-code);font-size:.68rem;color:#6e7681;
-    max-width:420px;overflow:hidden;
-}
-.sf-url-lock{color:#28c840;flex-shrink:0;display:flex;}
-.sf-url-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.sf-live{
-    display:flex;align-items:center;gap:.45rem;margin-left:auto;
-    font-family:var(--font-m);font-size:.65rem;color:#3d4f6b;
-}
-.sf-live-dot{
-    width:7px;height:7px;border-radius:50%;
-    background:#28c840;box-shadow:0 0 6px #28c840;
-    animation:pvPulse 2s ease infinite;
-}
-@keyframes pvPulse{0%,100%{box-shadow:0 0 4px #28c840;}50%{box-shadow:0 0 12px #28c840,0 0 20px rgba(40,200,64,.3);}}
+.ps-browser-dots{display:flex;gap:.35rem;}
+.ps-browser-dots span{width:12px;height:12px;border-radius:50%;display:block;}
 
-/* Iframe viewport */
-.sf-viewport{
+.ps-browser-url{
+    flex:1;max-width:440px;
+    display:flex;align-items:center;gap:.5rem;
+    background:rgba(7,7,10,.6);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:7px;
+    padding:.32rem .85rem;
+    font-family:var(--font-code);font-size:.68rem;
+    color:#6e7681;overflow:hidden;
+    cursor:default;
+}
+.ps-browser-url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+.ps-browser-actions{
+    display:flex;align-items:center;gap:.6rem;
+    margin-left:auto;flex-shrink:0;
+}
+.ps-live-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:#28c840;box-shadow:0 0 8px #28c840;
+    animation:psLivePulse 2s ease infinite;
+}
+@keyframes psLivePulse{0%,100%{box-shadow:0 0 5px #28c840;}50%{box-shadow:0 0 12px #28c840,0 0 22px rgba(40,200,64,.3);}}
+.ps-live-label{font-family:var(--font-m);font-size:.62rem;color:#28c840;letter-spacing:.1em;}
+
+.ps-open-btn{
+    display:inline-flex;align-items:center;gap:.35rem;
+    padding:.38rem .85rem;
+    background:rgba(0,255,204,.1);
+    border:1px solid rgba(0,255,204,.22);
+    border-radius:6px;
+    font-family:var(--font-m);font-size:.68rem;font-weight:600;
+    color:var(--accent);text-decoration:none;
+    transition:background .22s,border-color .22s,transform .22s;
+}
+.ps-open-btn:hover{background:var(--accent);color:var(--bg);border-color:var(--accent);transform:translateY(-1px);}
+
+/* Viewport — where iframe lives */
+.ps-viewport{
     position:relative;
     width:100%;
-    height:clamp(380px,52vw,620px);
-    overflow:hidden;background:#0a0a0f;
+    height:clamp(400px,55vw,680px);
+    overflow:hidden;
+    background:#07070a;
 }
-.sf-viewport iframe{
+@media(max-width:900px){.ps-viewport{height:clamp(320px,50vw,520px);}}
+@media(max-width:600px){.ps-viewport{height:320px;}}
+
+.ps-viewport iframe{
     position:absolute;top:0;left:0;
-    width:1440px;height:900px;
+    width:1440px;height:960px;
     border:none;pointer-events:none;
     transform-origin:top left;
-    transform:scale(var(--sf-scale,.4));
-    transition:opacity .45s ease;
+    transform:scale(var(--psscale,0.45));
+    transition:opacity .5s ease;
     opacity:0;
 }
-.sf-viewport iframe.sf-loaded{opacity:1;}
+.ps-viewport iframe.loaded{opacity:1;}
 
-/* Loading state */
-.sf-loading{
+/* Loading overlay */
+.ps-loading{
     position:absolute;inset:0;z-index:3;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.85rem;
-    background:#0a0a0f;transition:opacity .3s;
-    font-family:var(--font-m);font-size:.7rem;color:#4a4a5e;letter-spacing:.06em;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:.85rem;
+    background:#07070a;
+    font-family:var(--font-m);font-size:.72rem;
+    color:var(--fg-3);letter-spacing:.06em;
+    transition:opacity .35s ease;
 }
-.sf-loading.sf-done{opacity:0;pointer-events:none;}
-.sf-spinner{
-    width:26px;height:26px;border-radius:50%;
-    border:2px solid #1e2430;border-top-color:var(--accent);
-    animation:sfSpin .85s linear infinite;
+.ps-loading.hidden{opacity:0;pointer-events:none;}
+.ps-loading-ring{
+    width:30px;height:30px;
+    border:2px solid var(--border-2);
+    border-top-color:var(--accent);
+    border-radius:50%;
+    animation:psSpin .85s linear infinite;
 }
-@keyframes sfSpin{to{transform:rotate(360deg);}}
+@keyframes psSpin{to{transform:rotate(360deg);}}
 
-/* Open site button */
-.sf-open{
-    position:absolute;bottom:1rem;right:1rem;z-index:4;
-    display:inline-flex;align-items:center;gap:.45rem;
-    padding:.5rem 1rem;
-    background:rgba(7,7,10,.88);
-    border:1px solid rgba(0,255,204,.3);
-    border-radius:6px;
-    font-family:var(--font-m);font-size:.7rem;color:var(--accent);
-    text-decoration:none;backdrop-filter:blur(12px);
-    transition:background .22s,color .22s,transform .22s;
-}
-.sf-open:hover{background:var(--accent);color:var(--bg);transform:translateY(-2px);}
+/* TechPanda preview */
+.tp-preview{font-family:sans-serif;background:#0a1628;color:#e0e6f0;min-height:100%;display:flex;flex-direction:column;}
+.tp-nav{background:#0d1f3c;padding:.6rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);}
+.tp-logo{color:#00d4ff;font-weight:700;font-size:.85rem;letter-spacing:.05em;}
+.tp-nav-links{display:flex;gap:.8rem;font-size:.65rem;color:rgba(255,255,255,.5);}
+.tp-hero{padding:2.5rem 1.2rem;background:linear-gradient(135deg,#0d1f3c 0%,#0a1628 100%);text-align:center;border-bottom:1px solid rgba(255,255,255,.06);}
+.tp-hero-h{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.5rem;letter-spacing:-.01em;}
+.tp-hero-sub{font-size:.68rem;color:#8899aa;margin-bottom:1rem;}
+.tp-cta{display:inline-block;padding:.4rem 1rem;background:#00d4ff;color:#0a1628;font-size:.68rem;font-weight:700;border-radius:3px;}
+.tp-services{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;padding:1rem 1.2rem;}
+.tp-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:.7rem;text-align:center;}
+.tp-card-icon{font-size:1.1rem;margin-bottom:.3rem;}
+.tp-card-title{font-size:.65rem;font-weight:600;color:#e0e6f0;margin-bottom:.2rem;}
+.tp-card-sub{font-size:.58rem;color:#6677aa;}
 
-/* Project meta below frame */
-.showcase-meta{
-    display:grid;grid-template-columns:1fr auto;
-    align-items:start;gap:1.5rem;
-    padding:1.5rem 0 0;
-}
-@media(max-width:600px){.showcase-meta{grid-template-columns:1fr;gap:1rem;}}
-.sm-info{display:flex;flex-direction:column;gap:.4rem;}
-.sm-title{font-family:var(--font-h);font-size:clamp(1.1rem,2vw,1.55rem);font-weight:800;color:var(--fg);letter-spacing:-.02em;}
-.sm-desc{font-size:clamp(.82rem,.95vw,.94rem);color:var(--fg-2);line-height:1.55;max-width:580px;}
-.sm-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.3rem;}
-.sm-tag{font-family:var(--font-m);font-size:.65rem;padding:.22rem .7rem;border:1px solid var(--border-2);border-radius:20px;color:var(--accent);background:rgba(0,255,204,.05);}
-.sm-link{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.4rem;border-radius:7px;border:1px solid var(--accent);background:rgba(0,255,204,.07);font-family:var(--font-m);font-size:.76rem;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;align-self:flex-start;transition:background .22s,transform .22s;}
-.sm-link:hover{background:var(--accent);color:var(--bg);transform:translateY(-2px);}
+/* Learn Setu preview */
+.ls-preview{background:#1a1a2e;min-height:100%;display:flex;gap:0;font-family:sans-serif;color:#eee;}
+.ls-sidebar{width:48px;background:#16213e;display:flex;flex-direction:column;align-items:center;padding:.6rem 0;gap:.5rem;border-right:1px solid rgba(255,255,255,.06);}
+.ls-si{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:rgba(255,255,255,.4);transition:all .2s;}
+.ls-si.active{background:rgba(0,255,204,.15);color:#00ffcc;}
+.ls-main{flex:1;padding:1rem;overflow:auto;}
+.ls-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.ls-title{font-size:.9rem;font-weight:700;color:#fff;}
+.ls-badge{font-size:.58rem;padding:.2rem .5rem;background:rgba(0,255,204,.15);color:#00ffcc;border-radius:10px;border:1px solid rgba(0,255,204,.2);}
+.ls-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.8rem;}
+.ls-widget{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.6rem;position:relative;overflow:hidden;}
+.ls-widget-title{font-size:.6rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem;}
+.ls-widget-val{font-size:1rem;font-weight:700;color:#fff;}
+.ls-widget-sub{font-size:.58rem;color:rgba(255,255,255,.3);margin-top:.1rem;}
+.ls-widget-bar{height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:.4rem;overflow:hidden;}
+.ls-widget-fill{height:100%;background:linear-gradient(90deg,#00ffcc,#0099ff);border-radius:2px;}
+.ls-ai{background:linear-gradient(135deg,rgba(0,255,204,.1),rgba(0,153,255,.1));border:1px solid rgba(0,255,204,.2);border-radius:8px;padding:.6rem;}
+.ls-ai-head{font-size:.6rem;color:#00ffcc;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem;}
+.ls-ai-text{font-size:.65rem;color:rgba(255,255,255,.6);line-height:1.4;}
+
+/* Rajput Mobile preview */
+.rm-preview{background:#111;min-height:100%;font-family:sans-serif;color:#eee;}
+.rm-nav{background:#1a1a1a;padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);}
+.rm-logo{color:#f5a623;font-weight:700;font-size:.8rem;}
 .rm-hero{background:linear-gradient(135deg,#1a1a1a,#2a1a0a);padding:1.5rem 1rem;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);}
 .rm-h{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.3rem;}
 .rm-sub{font-size:.65rem;color:#888;margin-bottom:.8rem;}
@@ -1625,9 +1796,6 @@ img{display:block;max-width:100%;
 <div id="c-dot"></div>
 <div id="c-ring"></div>
 
-<!-- Toast -->
-<div class="toast" id="toast">Copied to clipboard ✓</div>
-
 <!-- Certificate Modal -->
 <div class="modal-bg" id="certModal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
     <div class="modal-box">
@@ -1746,42 +1914,64 @@ img{display:block;max-width:100%;
 <header class="hero" id="hero">
     <div id="webgl"></div>
     <div class="hero-inner">
-        <div class="hero-pre">ARCHITECTING SHIFTS // AI &amp; SOFTWARE SYSTEMS</div>
+        <div class="hero-pre">FULLSTACK DEVELOPER // AI &amp; SOFTWARE SYSTEMS</div>
         <h1 class="hero-h">
             <span class="ln"><span class="lt">SHUBHANSHU</span></span>
             <span class="ln"><span class="lt">TIWARI.</span></span>
         </h1>
-        <p class="hero-desc">Bridging 12 years of enterprise precision with next-generation software engineering, offline-first systems, and elite AI prompt architectures.</p>
+        <p class="hero-desc">Full Stack Developer building responsive web apps and cross-platform software — Flutter, React, Node.js, PHP, SQL, Supabase — with a focus on scalable, AI-powered, real-world solutions.</p>
         <div class="hero-btns">
             <a href="#work" class="btn mag"><span>View Proof of Work</span></a>
             <a href="#contact" class="btn btn-ghost mag"><span>Contact Directly</span></a>
         </div>
     </div>
     <div class="hero-foot">
-        <span><strong>LOC:</strong> Mumbai, India</span>
+        <span><strong>LOC:</strong> Mulund, Mumbai</span>
         <div class="scroll-tick"><span>SCROLL TO EXPLORE</span><div class="tick-bar"><div class="tick-fill"></div></div></div>
-        <span><strong>STATUS:</strong> Open to Select Roles</span>
+        <span><strong>STATUS:</strong> Open to Opportunities</span>
     </div>
 </header>
 
 <!-- ═══ PIVOT ═══ -->
 <section class="sec pivot" id="pivot">
     <div class="wrap">
-        <div class="eyebrow">01 // The Pivot</div>
+        <div class="eyebrow">01 // About Me</div>
         <div class="pivot-g">
             <div><div class="pivot-sticky">
-                <h2 class="pivot-h" id="pivot-headline">12 YEARS IN<br>ENTERPRISE.<br>0 REGRETS.<br><em>100% INTENTIONAL.</em></h2>
+                <h2 class="pivot-h" id="pivot-headline">FULLSTACK<br>DEVELOPER.<br>AI-FIRST.<br><em>REAL-WORLD READY.</em></h2>
+
+                <!-- Education block inside sticky -->
+                <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);">
+                    <div style="font-family:var(--font-m);font-size:.7rem;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem;">Education</div>
+
+                    <div style="margin-bottom:1.25rem;">
+                        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.25rem;">
+                            <div style="font-family:var(--font-m);font-size:.78rem;font-weight:600;color:var(--fg);line-height:1.3;">DR. DY PATIL UNIVERSITY</div>
+                            <div style="font-family:var(--font-m);font-size:.68rem;color:var(--accent);white-space:nowrap;flex-shrink:0;">Ongoing</div>
+                        </div>
+                        <div style="font-family:var(--font-m);font-size:.7rem;color:var(--fg-3);">Online Master of Computer Applications <strong style="color:var(--fg-2);">(MCA)</strong></div>
+                    </div>
+
+                    <div>
+                        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.25rem;">
+                            <div style="font-family:var(--font-m);font-size:.78rem;font-weight:600;color:var(--fg);line-height:1.3;">TILAK MAHARASHTRA VIDYAPEETH</div>
+                            <div style="font-family:var(--font-m);font-size:.68rem;color:var(--fg-3);white-space:nowrap;flex-shrink:0;">2023–2026</div>
+                        </div>
+                        <div style="font-family:var(--font-m);font-size:.7rem;color:var(--fg-3);">Bachelor of Computer Applications <strong style="color:var(--fg-2);">(BCA)</strong></div>
+                    </div>
+                </div>
             </div></div>
+
             <div>
                 <div class="pivot-ps">
-                    <p class="pivot-p">Most software engineering portfolios hide past non-tech careers. <strong>I consider mine an unfair advantage.</strong> For nearly 12 years at Reliance Industries, and currently in procurement at Siemens India, I mastered what most engineers take a decade to learn: extreme operational rigor, navigating complex constraints, and high-stakes project management.</p>
-                    <p class="pivot-p">My transition into software engineering is not an accident — it is a <strong>deliberate, high-agency decision.</strong> Currently pursuing my BCA at Tilak Maharashtra Vidyapeeth (2023–2026), I bring enterprise discipline directly into codebase architecture.</p>
-                    <p class="pivot-p">I don't just write code to pass tests. I architect robust systems designed for real-world business realities, unpredictable offline environments, and the rapidly accelerating AI frontier.</p>
+                    <p class="pivot-p"><strong>Full Stack Developer</strong> with hands-on experience building responsive web applications and cross-platform software using Flutter, React, Node.js, PHP, SQL, and Supabase.</p>
+                    <p class="pivot-p">Strong focus on <strong>scalable solutions, AI-powered applications,</strong> and real-world problem solving — currently at Siemens India with 12+ years of enterprise execution discipline.</p>
+                    <p class="pivot-p">Experienced with <strong>100+ AI models & assistants</strong>, prompt engineering, and delivering production-ready systems across Android, iOS, Web, and Desktop targets.</p>
                 </div>
                 <div class="pivot-stats">
-                    <div><div class="sv" data-target="12">0</div><div class="sl">Yrs Enterprise</div></div>
+                    <div><div class="sv" data-target="30">0</div><div class="sl">MULTIPLE PROJECT EXPERIENCE</div></div>
                     <div><div class="sv" data-target="100">0</div><div class="sl">AI Models Used</div></div>
-                    <div><div class="sv" data-target="3">0</div><div class="sl">Live Products</div></div>
+                    <div><div class="sv" data-target="9">0</div><div class="sl">Live Products</div></div>
                 </div>
             </div>
         </div>
@@ -1791,32 +1981,31 @@ img{display:block;max-width:100%;
 <!-- ═══ PROOF OF WORK ═══ -->
 <section class="sec work" id="work">
     <div class="wrap">
-        <div class="eyebrow">02 // Proof of Work</div>
-        <h2 class="sec-h">ENGINEERING BEYOND<br>THE HAPPY PATH.</h2>
+        <div class="eyebrow">02 // Projects</div>
+        <h2 class="sec-h">PRODUCTS BUILT.<br>LIVE IN THE WILD.</h2>
 
-        <!-- FEATURED PROJECTS: Large case-study layout -->
-        <div class="work-featured">
+        <!-- ── FEATURED CASE STUDIES ── -->
+        <div class="work-list">
 
-            <!-- P1: TechPanda -->
+            <!-- Project 1: TechPanda -->
             <div class="wi" id="p1">
                 <div class="wv"><div class="wv-inner">
                     <div class="b-bar"><div class="b-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="b-url">techpanda.co.in</div></div>
-                    <div class="b-body"><iframe src="https://techpanda.co.in" title="TechPanda Live Preview" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe><div class="b-hover"><a href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer" class="b-badge" style="cursor:pointer;">OPEN LIVE SITE ↗</a></div></div>
+                    <div class="b-body"><iframe src="https://techpanda.co.in" title="TechPanda Live Preview" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" aria-label="TechPanda live preview"></iframe><div class="b-hover"><a href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer" class="b-badge" style="cursor:pointer;">OPEN LIVE SITE ↗</a></div></div>
                 </div></div>
                 <div class="wc">
-                    <div class="w-num">01 // CORPORATE SITE · INTERNSHIP BUILD</div>
+                    <div class="w-num">01 // TECH PANDA ENGINEERING CONSULTANTS</div>
                     <h3 class="w-title">TechPanda Engineering</h3>
                     <div class="w-think">
-                        <div class="w-step"><span class="w-lbl">The Constraint</span><p class="w-body">3-month internship. Full corporate digital presence from zero, solo — HVAC, MEP, electrical, plumbing, turnkey services. Zero existing brand assets.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Decision</span><p class="w-body">No frameworks. Semantic HTML5, CSS Grid/Flexbox, native JS. Deep schema markup for pristine Core Web Vitals from day one.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Outcome</span><p class="w-body">Lightning-fast, responsive corporate platform achieving immediate organic indexation — driving real client discovery.</p></div>
+                        <div class="w-step"><span class="w-lbl">What I Built</span><p class="w-body">Responsive corporate website from scratch using HTML, CSS, and JavaScript — modern UI, cross-device compatibility, interactive components, and SEO-friendly structure.</p></div>
+                        <div class="w-step"><span class="w-lbl">Impact</span><p class="w-body">Optimised performance for a fast, professional user experience; immediate organic indexation driving client discovery.</p></div>
                     </div>
-                    <div class="w-tags"><span class="tag">Vanilla JS</span><span class="tag">CSS Grid</span><span class="tag">SEO</span><span class="tag">Semantic HTML5</span></div>
-                    <div class="w-links"><a href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer" class="btn mag"><span>View Live ↗</span></a></div>
+                    <div class="w-tags"><span class="tag">Vanilla JS</span><span class="tag">CSS Grid/Flex</span><span class="tag">SEO Optimized</span><span class="tag">Semantic HTML5</span><span class="tag">Solo Build</span></div>
+                    <div class="w-links"><a href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer" class="btn mag"><span>View Live Site ↗</span></a></div>
                 </div>
             </div>
 
-            <!-- P2: Learn Setu -->
+            <!-- Project 2: Learn Setu -->
             <div class="wi flip" id="p2">
                 <div class="wv"><div class="wv-inner">
                     <div class="b-bar"><div class="b-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="b-url">learnsetu.app — Flutter + Supabase</div></div>
@@ -1826,169 +2015,286 @@ img{display:block;max-width:100%;
                     </div>
                 </div></div>
                 <div class="wc">
-                    <div class="w-num">02 // FINAL-YEAR SYSTEM BUILD · CROSS-PLATFORM</div>
+                    <div class="w-num">02 // CROSS-PLATFORM LEARNING APP</div>
                     <h3 class="w-title">Learn Setu</h3>
                     <div class="w-think">
-                        <div class="w-step"><span class="w-lbl">The Constraint</span><p class="w-body">Platform fragmentation + intermittent connectivity in developing regions — cloud-only tools fail completely offline.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Decision</span><p class="w-body">Offline-first Flutter + Supabase. Local data hydration, optimistic UI, background reconciliation daemons on reconnect.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Outcome</span><p class="w-body">AI Tutor, Science Labs, Smart Analytics, Gamified streaks — Android, iOS, Web &amp; Desktop. Zero data loss offline.</p></div>
+                        <div class="w-step"><span class="w-lbl">What I Built</span><p class="w-body">Cross-platform learning and productivity app using Flutter and Supabase — supporting Android, iOS, Web, and Desktop with offline-first architecture.</p></div>
+                        <div class="w-step"><span class="w-lbl">Features</span><p class="w-body">AI-powered assistance, real-time synchronization, smart analytics, and gamified learning for an engaging study experience.</p></div>
                     </div>
-                    <div class="w-tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Supabase</span><span class="tag">Offline-First</span><span class="tag">AI-Powered</span></div>
+                    <div class="w-tags"><span class="tag">Flutter</span><span class="tag">Supabase</span><span class="tag">Offline-First</span><span class="tag">AI-Powered</span><span class="tag">Cross-Platform</span></div>
                     <div class="w-links"><a href="#contact" class="btn mag"><span>Request Demo</span></a></div>
                 </div>
             </div>
 
-            <!-- P3: Rajput Mobile -->
+            <!-- Project 3: Rajput Mobile -->
             <div class="wi" id="p3">
                 <div class="wv"><div class="wv-inner">
                     <div class="b-bar"><div class="b-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="b-url">rajputmobile.shop</div></div>
-                    <div class="b-body"><iframe src="https://rajputmobile.shop/" title="Rajput Mobile Care" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe><div class="b-hover"><a href="https://rajputmobile.shop/" target="_blank" rel="noopener noreferrer" class="b-badge" style="cursor:pointer;">OPEN LIVE SITE ↗</a></div></div>
+                    <div class="b-body"><iframe src="https://rajputmobile.shop/" title="Rajput Mobile Care Live Preview" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" aria-label="Rajput Mobile Care preview"></iframe><div class="b-hover"><a href="https://rajputmobile.shop/" target="_blank" rel="noopener noreferrer" class="b-badge" style="cursor:pointer;">OPEN LIVE SITE ↗</a></div></div>
                 </div></div>
                 <div class="wc">
-                    <div class="w-num">03 // LOCAL BUSINESS · DIGITAL LAUNCH</div>
+                    <div class="w-num">03 // LOCAL BUSINESS DIGITAL LAUNCH</div>
                     <h3 class="w-title">Rajput Mobile Care</h3>
                     <div class="w-think">
-                        <div class="w-step"><span class="w-lbl">The Constraint</span><p class="w-body">19+ year trusted repair shop — zero digital presence, no discovery pathway beyond walk-ins.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Decision</span><p class="w-body">Conversion-first design with local SEO dominance. Premium brand elevation to match real-world trust.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Outcome</span><p class="w-body">Repair services, accessories, testimonials, trust signals — Sillod's most trusted hub, now online.</p></div>
+                        <div class="w-step"><span class="w-lbl">What I Built</span><p class="w-body">Premium business site for a 19+ year trusted mobile repair shop — service showcase, local SEO, mobile-first UX, and conversion-optimised layout.</p></div>
+                        <div class="w-step"><span class="w-lbl">Impact</span><p class="w-body">Sillod's most trusted repair hub, now fully discoverable online with all services, trust signals, and testimonials.</p></div>
                     </div>
-                    <div class="w-tags"><span class="tag">Local SEO</span><span class="tag">Mobile-First</span><span class="tag">Conversion UX</span></div>
-                    <div class="w-links"><a href="https://rajputmobile.shop/" target="_blank" rel="noopener noreferrer" class="btn mag"><span>View Live ↗</span></a></div>
+                    <div class="w-tags"><span class="tag">Business Site</span><span class="tag">Local SEO</span><span class="tag">Mobile-First</span><span class="tag">Conversion UX</span></div>
+                    <div class="w-links"><a href="https://rajputmobile.shop/" target="_blank" rel="noopener noreferrer" class="btn mag"><span>View Live Site ↗</span></a></div>
                 </div>
             </div>
 
-        </div>
+        </div><!-- /work-list -->
 
-        <!-- MORE PROJECTS: Grid of live previews -->
-        <div class="work-grid-label">More Live Projects</div>
-        <div class="work-grid">
+        <!-- ── MORE PROJECTS ── -->
+        <div class="more-projects-label">More Live Products</div>
 
-            <div class="wg-card">
-                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">lagnadeep.vercel.app</div></div>
-                <div class="wg-thumb"><iframe src="https://lagnadeep.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="Lagnadeep"></iframe><div class="wg-thumb-overlay"><a href="https://lagnadeep.vercel.app/" target="_blank" rel="noopener noreferrer" class="wg-overlay-btn">Open Site ↗</a></div></div>
-                <div class="wg-info"><div class="wg-name">Lagnadeep</div><div class="wg-desc">Wedding &amp; event platform with elegant, conversion-focused design.</div><div class="wg-tags"><span class="wg-tag">Events</span><span class="wg-tag">Web</span><span class="wg-tag">UI/UX</span></div></div>
-            </div>
+        <div class="proj-grid">
 
-            <div class="wg-card">
-                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">unisex-salonn.vercel.app</div></div>
-                <div class="wg-thumb"><iframe src="https://unisex-salonn.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="Unisex Salon"></iframe><div class="wg-thumb-overlay"><a href="https://unisex-salonn.vercel.app/" target="_blank" rel="noopener noreferrer" class="wg-overlay-btn">Open Site ↗</a></div></div>
-                <div class="wg-info"><div class="wg-name">Unisex Salon</div><div class="wg-desc">Premium salon booking site with service showcase and modern aesthetic.</div><div class="wg-tags"><span class="wg-tag">Beauty</span><span class="wg-tag">Local Business</span></div></div>
-            </div>
-
-            <div class="wg-card">
-                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">ricciscafe.vercel.app</div></div>
-                <div class="wg-thumb"><iframe src="https://ricciscafe.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="Ricci's Cafe"></iframe><div class="wg-thumb-overlay"><a href="https://ricciscafe.vercel.app/" target="_blank" rel="noopener noreferrer" class="wg-overlay-btn">Open Site ↗</a></div></div>
-                <div class="wg-info"><div class="wg-name">Ricci's Cafe</div><div class="wg-desc">Restaurant &amp; cafe brand site with menu, atmosphere, and online presence.</div><div class="wg-tags"><span class="wg-tag">Food &amp; Beverage</span><span class="wg-tag">Brand</span></div></div>
-            </div>
-
-            <div class="wg-card">
-                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">friendscaffe.vercel.app</div></div>
-                <div class="wg-thumb"><iframe src="https://friendscaffe.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="Friends Caffe"></iframe><div class="wg-thumb-overlay"><a href="https://friendscaffe.vercel.app/" target="_blank" rel="noopener noreferrer" class="wg-overlay-btn">Open Site ↗</a></div></div>
-                <div class="wg-info"><div class="wg-name">Friends Caffe</div><div class="wg-desc">Cozy cafe digital presence — menu, ambiance, and social discovery.</div><div class="wg-tags"><span class="wg-tag">Cafe</span><span class="wg-tag">Hospitality</span></div></div>
-            </div>
-
-            <div class="wg-card">
-                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">kaanch-mall.vercel.app</div></div>
-                <div class="wg-thumb"><iframe src="https://kaanch-mall.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="Kaanch Mall"></iframe><div class="wg-thumb-overlay"><a href="https://kaanch-mall.vercel.app/" target="_blank" rel="noopener noreferrer" class="wg-overlay-btn">Open Site ↗</a></div></div>
-                <div class="wg-info"><div class="wg-name">Kaanch Mall</div><div class="wg-desc">Retail &amp; shopping destination site with product showcase and brand identity.</div><div class="wg-tags"><span class="wg-tag">Retail</span><span class="wg-tag">E-commerce</span></div></div>
-            </div>
-
-            <div class="wg-card">
-                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">E-commerce Application</div></div>
-                <div class="wg-thumb" style="background:linear-gradient(135deg,#0d1117,#1a1a2e);display:flex;align-items:center;justify-content:center;">
-                    <div style="text-align:center;padding:1.5rem;">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(0,255,204,.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                        <div style="font-family:var(--font-m);font-size:.68rem;color:rgba(0,255,204,.5);margin-top:.75rem;">TFF — The Figure Factory</div>
+            <!-- Lagnadeep -->
+            <div class="proj-card">
+                <div class="proj-bar">
+                    <div class="proj-dots"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+                    <div class="proj-url">lagnadeep.vercel.app</div>
+                </div>
+                <div class="proj-view">
+                    <iframe src="https://lagnadeep.vercel.app/" title="Lagnadeep" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" aria-label="Lagnadeep live preview"></iframe>
+                    <div class="proj-overlay">
+                        <div class="proj-overlay-title">Lagnadeep</div>
+                        <div class="proj-overlay-tags"><span class="proj-overlay-tag">Wedding</span><span class="proj-overlay-tag">Event</span><span class="proj-overlay-tag">Responsive</span></div>
+                        <a href="https://lagnadeep.vercel.app/" target="_blank" rel="noopener noreferrer" class="proj-visit">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Open Site
+                        </a>
                     </div>
                 </div>
-                <div class="wg-info"><div class="wg-name">The Figure Factory (TFF)</div><div class="wg-desc">E-commerce app for collectible figures. Responsive UI, product browsing, scalable architecture.</div><div class="wg-tags"><span class="wg-tag">E-commerce</span><span class="wg-tag">React</span><span class="wg-tag">Node JS</span></div></div>
             </div>
 
-        </div>
+            <!-- Unisex Salon -->
+            <div class="proj-card">
+                <div class="proj-bar">
+                    <div class="proj-dots"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+                    <div class="proj-url">unisex-salonn.vercel.app</div>
+                </div>
+                <div class="proj-view">
+                    <iframe src="https://unisex-salonn.vercel.app/" title="Unisex Salon" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" aria-label="Unisex Salon live preview"></iframe>
+                    <div class="proj-overlay">
+                        <div class="proj-overlay-title">Unisex Salon</div>
+                        <div class="proj-overlay-tags"><span class="proj-overlay-tag">Beauty</span><span class="proj-overlay-tag">Salon</span><span class="proj-overlay-tag">Booking UX</span></div>
+                        <a href="https://unisex-salonn.vercel.app/" target="_blank" rel="noopener noreferrer" class="proj-visit">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Open Site
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ricci's Cafe -->
+            <div class="proj-card">
+                <div class="proj-bar">
+                    <div class="proj-dots"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+                    <div class="proj-url">ricciscafe.vercel.app</div>
+                </div>
+                <div class="proj-view">
+                    <iframe src="https://ricciscafe.vercel.app/" title="Ricci's Cafe" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" aria-label="Ricci's Cafe live preview"></iframe>
+                    <div class="proj-overlay">
+                        <div class="proj-overlay-title">Ricci's Cafe</div>
+                        <div class="proj-overlay-tags"><span class="proj-overlay-tag">Restaurant</span><span class="proj-overlay-tag">Menu UI</span><span class="proj-overlay-tag">Premium</span></div>
+                        <a href="https://ricciscafe.vercel.app/" target="_blank" rel="noopener noreferrer" class="proj-visit">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Open Site
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friends Caffe -->
+            <div class="proj-card">
+                <div class="proj-bar">
+                    <div class="proj-dots"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+                    <div class="proj-url">friendscaffe.vercel.app</div>
+                </div>
+                <div class="proj-view">
+                    <iframe src="https://friendscaffe.vercel.app/" title="Friends Caffe" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" aria-label="Friends Caffe live preview"></iframe>
+                    <div class="proj-overlay">
+                        <div class="proj-overlay-title">Friends Caffe</div>
+                        <div class="proj-overlay-tags"><span class="proj-overlay-tag">Cafe</span><span class="proj-overlay-tag">Branding</span><span class="proj-overlay-tag">Local SEO</span></div>
+                        <a href="https://friendscaffe.vercel.app/" target="_blank" rel="noopener noreferrer" class="proj-visit">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Open Site
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kaanch Mall -->
+            <div class="proj-card">
+                <div class="proj-bar">
+                    <div class="proj-dots"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+                    <div class="proj-url">kaanch-mall.vercel.app</div>
+                </div>
+                <div class="proj-view">
+                    <iframe src="https://kaanch-mall.vercel.app/" title="Kaanch Mall" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" aria-label="Kaanch Mall live preview"></iframe>
+                    <div class="proj-overlay">
+                        <div class="proj-overlay-title">Kaanch Mall</div>
+                        <div class="proj-overlay-tags"><span class="proj-overlay-tag">E-Commerce</span><span class="proj-overlay-tag">Glass Art</span><span class="proj-overlay-tag">Shop UI</span></div>
+                        <a href="https://kaanch-mall.vercel.app/" target="_blank" rel="noopener noreferrer" class="proj-visit">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Open Site
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lagnadeep v2 -->
+            <div class="proj-card">
+                <div class="proj-bar">
+                    <div class="proj-dots"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+                    <div class="proj-url">lagnadeep.vercel.app</div>
+                </div>
+                <div class="proj-view">
+                    <iframe src="https://lagnadeep.vercel.app/" title="Lagnadeep" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" aria-label="Lagnadeep live preview"></iframe>
+                    <div class="proj-overlay">
+                        <div class="proj-overlay-title">Lagnadeep</div>
+                        <div class="proj-overlay-tags"><span class="proj-overlay-tag">Wedding</span><span class="proj-overlay-tag">Event</span><span class="proj-overlay-tag">Animated</span></div>
+                        <a href="https://lagnadeep.vercel.app/" target="_blank" rel="noopener noreferrer" class="proj-visit">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Open Site
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /proj-grid -->
+
     </div>
 </section>
 
-<!-- ═══ PROCESS SHOWCASE ═══ -->
+<!-- ═══ PROCESS SHOWCASE — LIVE BROWSER GALLERY ═══ -->
 <section class="sec process" id="process">
     <div class="wrap">
 
         <div class="eyebrow">02.5 // Process Showcase</div>
-        <h2 class="sec-h">LIVE SITES.<br>REAL PRODUCTS.</h2>
+        <h2 class="sec-h">EVERY PIXEL.<br>LIVE IN BROWSER.</h2>
         <p class="process-intro">
-            Every project here is a deployed, production site — click through to explore them live in full. Select a project below.
+            Select a project and see it running live inside a real browser viewport — exactly as users experience it.
         </p>
 
-        <!-- Project tabs -->
-        <div class="ps-cards" id="psTabs">
-            <button class="ps-card active" data-sf="techpanda" aria-pressed="true">
-                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
-                <span class="ps-card-name">TechPanda</span>
+        <!-- ── Project selector cards ── -->
+        <div class="ps-cards">
+
+            <button class="ps-card active" data-ps="techpanda" data-psurl="https://techpanda.co.in" data-pslive="techpanda.co.in" data-psopen="https://techpanda.co.in" style="--ps-color:rgba(0,212,255,.8);" aria-pressed="true">
+                <div class="ps-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <div class="ps-card-info">
+                    <div class="ps-card-name">TechPanda</div>
+                    <div class="ps-card-desc">Engineering Corporate</div>
+                    <div class="ps-card-stack"><span class="ps-pill">HTML</span><span class="ps-pill">CSS</span><span class="ps-pill">JS</span></div>
+                </div>
             </button>
-            <button class="ps-card" data-sf="rajput" aria-pressed="false">
-                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
-                <span class="ps-card-name">Rajput Mobile</span>
+
+            <button class="ps-card" data-ps="rajput" data-psurl="https://rajputmobile.shop/" data-pslive="rajputmobile.shop" data-psopen="https://rajputmobile.shop/" style="--ps-color:rgba(245,166,35,.8);" aria-pressed="false">
+                <div class="ps-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <div class="ps-card-info">
+                    <div class="ps-card-name">Rajput Mobile</div>
+                    <div class="ps-card-desc">Local Business</div>
+                    <div class="ps-card-stack"><span class="ps-pill">HTML</span><span class="ps-pill">CSS</span><span class="ps-pill">SEO</span></div>
+                </div>
             </button>
-            <button class="ps-card" data-sf="lagnadeep" aria-pressed="false">
-                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
-                <span class="ps-card-name">Lagnadeep</span>
+
+            <button class="ps-card" data-ps="lagnadeep" data-psurl="https://lagnadeep.vercel.app/" data-pslive="lagnadeep.vercel.app" data-psopen="https://lagnadeep.vercel.app/" style="--ps-color:rgba(255,100,130,.8);" aria-pressed="false">
+                <div class="ps-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </div>
+                <div class="ps-card-info">
+                    <div class="ps-card-name">Lagnadeep</div>
+                    <div class="ps-card-desc">Wedding Event Site</div>
+                    <div class="ps-card-stack"><span class="ps-pill">Animated</span><span class="ps-pill">Vercel</span></div>
+                </div>
             </button>
-            <button class="ps-card" data-sf="salon" aria-pressed="false">
-                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-                <span class="ps-card-name">Unisex Salon</span>
+
+            <button class="ps-card" data-ps="salon" data-psurl="https://unisex-salonn.vercel.app/" data-pslive="unisex-salonn.vercel.app" data-psopen="https://unisex-salonn.vercel.app/" style="--ps-color:rgba(200,120,255,.8);" aria-pressed="false">
+                <div class="ps-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg>
+                </div>
+                <div class="ps-card-info">
+                    <div class="ps-card-name">Unisex Salon</div>
+                    <div class="ps-card-desc">Beauty Studio</div>
+                    <div class="ps-card-stack"><span class="ps-pill">UI</span><span class="ps-pill">Booking</span></div>
+                </div>
             </button>
-            <button class="ps-card" data-sf="riccis" aria-pressed="false">
-                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></span>
-                <span class="ps-card-name">Ricci's Cafe</span>
+
+            <button class="ps-card" data-ps="ricci" data-psurl="https://ricciscafe.vercel.app/" data-pslive="ricciscafe.vercel.app" data-psopen="https://ricciscafe.vercel.app/" style="--ps-color:rgba(255,160,60,.8);" aria-pressed="false">
+                <div class="ps-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                </div>
+                <div class="ps-card-info">
+                    <div class="ps-card-name">Ricci's Cafe</div>
+                    <div class="ps-card-desc">Restaurant Brand</div>
+                    <div class="ps-card-stack"><span class="ps-pill">Menu</span><span class="ps-pill">Premium</span></div>
+                </div>
             </button>
-            <button class="ps-card" data-sf="friends" aria-pressed="false">
-                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-                <span class="ps-card-name">Friends Caffe</span>
+
+            <button class="ps-card" data-ps="friends" data-psurl="https://friendscaffe.vercel.app/" data-pslive="friendscaffe.vercel.app" data-psopen="https://friendscaffe.vercel.app/" style="--ps-color:rgba(80,200,120,.8);" aria-pressed="false">
+                <div class="ps-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="ps-card-info">
+                    <div class="ps-card-name">Friends Caffe</div>
+                    <div class="ps-card-desc">Community Cafe</div>
+                    <div class="ps-card-stack"><span class="ps-pill">Branding</span><span class="ps-pill">Local</span></div>
+                </div>
             </button>
-            <button class="ps-card" data-sf="kaanch" aria-pressed="false">
-                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-                <span class="ps-card-name">Kaanch Mall</span>
+
+            <button class="ps-card" data-ps="kaanch" data-psurl="https://kaanch-mall.vercel.app/" data-pslive="kaanch-mall.vercel.app" data-psopen="https://kaanch-mall.vercel.app/" style="--ps-color:rgba(100,180,255,.8);" aria-pressed="false">
+                <div class="ps-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                </div>
+                <div class="ps-card-info">
+                    <div class="ps-card-name">Kaanch Mall</div>
+                    <div class="ps-card-desc">E-Commerce Store</div>
+                    <div class="ps-card-stack"><span class="ps-pill">Shop UI</span><span class="ps-pill">Glass Art</span></div>
+                </div>
             </button>
+
         </div>
 
-        <!-- Big browser showcase frame -->
-        <div class="showcase-frame">
-            <div class="sf-bar">
-                <div class="sf-dots">
-                    <div class="sf-dot" style="background:#ff5f57;"></div>
-                    <div class="sf-dot" style="background:#febc2e;"></div>
-                    <div class="sf-dot" style="background:#28c840;"></div>
+        <!-- ── Live Browser Window ── -->
+        <div class="ps-browser">
+
+            <!-- Chrome bar -->
+            <div class="ps-browser-bar">
+                <div class="ps-browser-dots">
+                    <span style="background:#ff5f57"></span>
+                    <span style="background:#febc2e"></span>
+                    <span style="background:#28c840"></span>
                 </div>
-                <div class="sf-url">
-                    <span class="sf-url-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#28c840" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-                    <span class="sf-url-text" id="sfUrlText">techpanda.co.in</span>
+                <div class="ps-browser-url">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#28c840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span id="psBrowserUrl">techpanda.co.in</span>
                 </div>
-                <div class="sf-live">
-                    <div class="sf-live-dot"></div>
-                    <span>LIVE</span>
+                <div class="ps-browser-actions">
+                    <div class="ps-live-dot"></div>
+                    <span class="ps-live-label">LIVE</span>
+                    <a class="ps-open-btn" id="psOpenBtn" href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        Open
+                    </a>
                 </div>
             </div>
-            <div class="sf-viewport" id="sfViewport">
-                <div class="sf-loading" id="sfLoading">
-                    <div class="sf-spinner"></div>
+
+            <!-- Iframe viewport -->
+            <div class="ps-viewport" id="psViewport">
+                <div class="ps-loading" id="psLoading">
+                    <div class="ps-loading-ring"></div>
                     <span>Loading live site…</span>
                 </div>
                 <!-- iframe injected by JS -->
             </div>
-        </div>
 
-        <!-- Project meta row below frame -->
-        <div class="showcase-meta" id="sfMeta">
-            <div class="sm-info">
-                <div class="sm-title" id="sfTitle">TechPanda Engineering</div>
-                <div class="sm-desc" id="sfDesc">Full corporate site built solo in a 3-month internship. Semantic HTML5, CSS Grid/Flex, native JS — zero framework overhead, pristine Core Web Vitals.</div>
-                <div class="sm-tags" id="sfTags">
-                    <span class="sm-tag">HTML5</span><span class="sm-tag">CSS Grid</span><span class="sm-tag">Vanilla JS</span><span class="sm-tag">SEO</span>
-                </div>
-            </div>
-            <a class="sm-link" id="sfLink" href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                Open Live Site
-            </a>
         </div>
 
     </div>
@@ -1997,7 +2303,7 @@ img{display:block;max-width:100%;
 <!-- ═══ HOW I WORK ═══ -->
 <section class="sec toolkit" id="toolkit">
     <div class="wrap">
-        <div class="eyebrow">03 // How I Work</div>
+        <div class="eyebrow">03 // Skills &amp; Toolkit</div>
         <h2 class="sec-h">THE ENGINEERING SYSTEM<br>&amp; AI TOOLKIT.</h2>
         <div class="tk-g">
             <div>
@@ -2173,12 +2479,12 @@ img{display:block;max-width:100%;
 <section class="sec contact" id="contact">
     <div class="wrap">
 
-        <div class="eyebrow" style="justify-content:center;">04 // The Close</div>
+        <div class="eyebrow" style="justify-content:center;">04 // Links &amp; Contact</div>
 
         <h2 class="contact-h">LET'S BUILD<br>SOMETHING<br>EXCEPTIONAL.</h2>
 
         <p class="contact-sub">
-            Seeking a high-impact software engineering role where enterprise rigor, offline-first system mastery, and advanced AI fluency are the baseline — not the bonus.
+            Full Stack Developer open to high-impact roles — web, mobile, AI. Mumbai-based, globally available.
         </p>
 
         <!-- ── Social Links ── -->
@@ -2257,7 +2563,7 @@ img{display:block;max-width:100%;
         <footer class="foot">
             <div class="foot-status">
                 <div class="s-dot" aria-hidden="true"></div>
-                <span>Mumbai, India — Open to global opportunities</span>
+                <span>Mulund, Mumbai — Open to global opportunities</span>
             </div>
             <div>© 2026 Shubhanshu Tiwari. Built with absolute discipline.</div>
         </footer>
@@ -2488,84 +2794,175 @@ function renderCodeFromChars(chars, count) {
     return {html, lines: lineNum+1};
 }
 
-/* ═════════════════════════════════════════
-   PROCESS SHOWCASE — BROWSER GALLERY JS
-═════════════════════════════════════════ */
-const SF_DATA = {
-    techpanda: { url:'https://techpanda.co.in',       display:'techpanda.co.in',          title:'TechPanda Engineering',  desc:'Full corporate site built solo in a 3-month internship. Semantic HTML5, CSS Grid, Vanilla JS — zero framework overhead, pristine Core Web Vitals.', tags:['HTML5','CSS Grid','Vanilla JS','SEO'] },
-    rajput:    { url:'https://rajputmobile.shop/',     display:'rajputmobile.shop',         title:'Rajput Mobile Care',     desc:'19+ year repair shop brought online. Conversion-first design, local SEO dominant, mobile-first UX.', tags:['Local SEO','Mobile-First','Conversion UX'] },
-    lagnadeep: { url:'https://lagnadeep.vercel.app/',  display:'lagnadeep.vercel.app',      title:'Lagnadeep',              desc:'Wedding & event platform with elegant, conversion-focused design and seamless user experience.', tags:['Events','Web Design','UI/UX'] },
-    salon:     { url:'https://unisex-salonn.vercel.app/', display:'unisex-salonn.vercel.app', title:'Unisex Salon',         desc:'Premium salon booking site with service showcase, atmosphere gallery, and modern branding.', tags:['Beauty','Local Business','Booking'] },
-    riccis:    { url:'https://ricciscafe.vercel.app/', display:'ricciscafe.vercel.app',     title:"Ricci's Cafe",           desc:'Restaurant & cafe brand site with menu presentation, atmosphere visuals, and strong local identity.', tags:['Food & Beverage','Brand','Restaurant'] },
-    friends:   { url:'https://friendscaffe.vercel.app/', display:'friendscaffe.vercel.app', title:'Friends Caffe',          desc:'Cozy cafe digital presence — menu, ambiance, events, and social discovery for a community brand.', tags:['Cafe','Hospitality','Community'] },
-    kaanch:    { url:'https://kaanch-mall.vercel.app/', display:'kaanch-mall.vercel.app',   title:'Kaanch Mall',            desc:'Retail & shopping destination with product showcase, collections, and premium brand identity.', tags:['Retail','E-commerce','Brand'] },
+/* Project live URLs and metadata */
+const PS_META = {
+    techpanda: { url:'https://techpanda.co.in',    display:'techpanda.co.in',   openUrl:'https://techpanda.co.in'   },
+    learnsetu:  { url:'https://rajputmobile.shop/', display:'learnsetu.app',      openUrl:'#contact'                  },
+    rajput:     { url:'https://rajputmobile.shop/', display:'rajputmobile.shop',  openUrl:'https://rajputmobile.shop' }
 };
 
-/* Showcase gallery switcher */
-let sfActive = 'techpanda';
-let sfIframe = null;
+function injectPreviewIframe(tabKey) {
+    const wrap    = document.getElementById('pvIframeWrap');
+    const loading = document.getElementById('pvLoading');
+    const urlEl   = document.getElementById('pvUrlText');
+    if(!wrap) return;
 
-function loadShowcase(key) {
-    const data = SF_DATA[key];
-    if(!data) return;
-    sfActive = key;
-    const viewport = document.getElementById('sfViewport');
-    const loading  = document.getElementById('sfLoading');
-    const urlEl    = document.getElementById('sfUrlText');
-    const titleEl  = document.getElementById('sfTitle');
-    const descEl   = document.getElementById('sfDesc');
-    const tagsEl   = document.getElementById('sfTags');
-    const linkEl   = document.getElementById('sfLink');
-    if(!viewport) return;
-    if(urlEl)   urlEl.textContent   = data.display;
-    if(titleEl) titleEl.textContent = data.title;
-    if(descEl)  descEl.textContent  = data.desc;
-    if(tagsEl)  tagsEl.innerHTML    = data.tags.map(function(t){return '<span class="sm-tag">'+t+'</span>';}).join('');
-    if(linkEl)  linkEl.href = data.url;
-    if(loading) { loading.style.opacity='1'; loading.style.pointerEvents='all'; loading.querySelector('span').textContent='Loading live site…'; }
-    if(sfIframe) sfIframe.remove();
-    const vw = viewport.offsetWidth  || 900;
-    const vh = viewport.offsetHeight || 500;
-    const scale = Math.min(vw/1440, vh/900);
-    viewport.style.setProperty('--sf-scale', scale.toFixed(4));
+    const meta = PS_META[tabKey];
+
+    // Update URL bar
+    if(urlEl) urlEl.textContent = meta.display;
+
+    // Show loading
+    if(loading) loading.classList.remove('hidden');
+
+    // Remove any existing iframe + open btn
+    wrap.querySelectorAll('iframe, .pv-open-btn').forEach(el => el.remove());
+
+    // Compute scale to fill panel
+    const panelW = wrap.offsetWidth  || 600;
+    const panelH = wrap.offsetHeight || 400;
+    const scale  = Math.min(panelW / 1400, panelH / 900);
+    wrap.style.setProperty('--pv-scale', scale.toFixed(4));
+
+    // Build iframe
     const iframe = document.createElement('iframe');
-    iframe.src   = data.url;
-    iframe.title = data.title + ' live preview';
+    iframe.src    = meta.url;
+    iframe.title  = 'Live preview of ' + meta.display;
+    iframe.setAttribute('loading', 'lazy');
+    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+    iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('aria-label', meta.display + ' live preview');
+
+    // Show on load
+    iframe.addEventListener('load', () => {
+        iframe.classList.add('loaded');
+        if(loading) loading.classList.add('hidden');
+    });
+
+    // Fallback if load fails / blocked
+    iframe.addEventListener('error', () => {
+        if(loading) {
+            loading.querySelector('span').textContent = 'Preview blocked by site policy';
+            loading.querySelector('.pv-loading-ring').style.display = 'none';
+        }
+    });
+
+    wrap.appendChild(iframe);
+
+    // Open-site button
+    const btn = document.createElement('a');
+    btn.className = 'pv-open-btn';
+    btn.href = meta.openUrl;
+    if(!meta.openUrl.startsWith('#')) { btn.target = '_blank'; btn.rel = 'noopener noreferrer'; }
+    btn.innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Open Live Site`;
+    wrap.appendChild(btn);
+}
+
+function startCodeTyping(tabKey) {
+    const proj = PROJECTS[tabKey];
+    if(!proj) return;
+    cancelAnimationFrame(ceTypingRaf);
+
+    // Update editor chrome
+    const fileEl   = document.getElementById('ceFile');
+    const langEl   = document.getElementById('ceLang');
+    const langStat = document.getElementById('ceLangStatus');
+    if(fileEl)   fileEl.textContent   = proj.file;
+    if(langEl)   langEl.textContent   = proj.lang;
+    if(langStat) langStat.textContent = proj.lang;
+
+    // Inject real live iframe preview
+    injectPreviewIframe(tabKey);
+
+    // Build and start typing
+    ceTotalText = buildFlatChars(proj.code);
+    ceCharIdx   = 0;
+    const ceCodeEl    = document.getElementById('ceCode');
+    const lineCountEl = document.getElementById('ceLineCount');
+    if(ceCodeEl) ceCodeEl.innerHTML = '';
+
+    // Render 3 chars per frame for fast but smooth effect
+    const BATCH = 3;
+    let lastTs = 0;
+
+    function tick(ts) {
+        if(ts - lastTs >= 16) {
+            for(let b = 0; b < BATCH; b++) {
+                if(ceCharIdx < ceTotalText.length) ceCharIdx++;
+            }
+            const result = renderCodeFromChars(ceTotalText, ceCharIdx);
+            if(ceCodeEl) {
+                ceCodeEl.innerHTML = result.html;
+                ceCodeEl.scrollTop = ceCodeEl.scrollHeight;
+            }
+            renderGutter(result.lines);
+            if(lineCountEl) lineCountEl.textContent = 'Ln ' + result.lines;
+            lastTs = ts;
+        }
+        if(ceCharIdx < ceTotalText.length) ceTypingRaf = requestAnimationFrame(tick);
+    }
+    ceTypingRaf = requestAnimationFrame(tick);
+}
+
+/* ── Process Showcase: live browser swap ── */
+function psLoadProject(card) {
+    if(!card) return;
+    const url     = card.dataset.psurl;
+    const liveUrl = card.dataset.pslive;
+    const openUrl = card.dataset.psopen;
+    const urlEl   = document.getElementById('psBrowserUrl');
+    const openEl  = document.getElementById('psOpenBtn');
+    const vp      = document.getElementById('psViewport');
+    const loading = document.getElementById('psLoading');
+    if(urlEl)  urlEl.textContent = liveUrl || url;
+    if(openEl) openEl.href = openUrl || url;
+    if(!vp) return;
+    vp.querySelectorAll('iframe').forEach(f => f.remove());
+    if(loading) loading.classList.remove('hidden');
+    // Compute scale so iframe fills viewport
+    const scale = Math.min(vp.offsetWidth / 1440, vp.offsetHeight / 960);
+    vp.style.setProperty('--psscale', scale.toFixed(4));
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.title = liveUrl || url;
     iframe.setAttribute('loading','lazy');
     iframe.setAttribute('sandbox','allow-scripts allow-same-origin');
     iframe.setAttribute('scrolling','no');
-    iframe.addEventListener('load', function() {
-        iframe.classList.add('sf-loaded');
-        if(loading) { loading.style.opacity='0'; loading.style.pointerEvents='none'; }
+    iframe.addEventListener('load', () => {
+        iframe.classList.add('loaded');
+        if(loading) loading.classList.add('hidden');
     });
-    iframe.addEventListener('error', function() {
-        if(loading) loading.querySelector('span').textContent='Preview not available';
+    iframe.addEventListener('error', () => {
+        const span = loading && loading.querySelector('span');
+        const ring = loading && loading.querySelector('.ps-loading-ring');
+        if(span) span.textContent = 'Preview blocked by site policy';
+        if(ring) ring.style.display = 'none';
     });
-    viewport.appendChild(iframe);
-    sfIframe = iframe;
+    vp.appendChild(iframe);
 }
 
-document.querySelectorAll('[data-sf]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('[data-sf]').forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
-        btn.classList.add('active');
-        btn.setAttribute('aria-pressed','true');
-        loadShowcase(btn.dataset.sf);
+// ps-card click
+document.querySelectorAll('.ps-card').forEach(card => {
+    card.addEventListener('click', () => {
+        document.querySelectorAll('.ps-card').forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); });
+        card.classList.add('active');
+        card.setAttribute('aria-pressed','true');
+        psLoadProject(card);
     });
 });
 
-const processObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e){ if(e.isIntersecting){ loadShowcase(sfActive); processObs.disconnect(); } });
-}, {threshold:0.15});
+// Auto-load first card when process section enters viewport
+const processObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if(e.isIntersecting) {
+            const first = document.querySelector('.ps-card.active') || document.querySelector('.ps-card');
+            psLoadProject(first);
+            processObs.disconnect();
+        }
+    });
+}, {threshold: 0.1});
 const processEl = document.getElementById('process');
 if(processEl) processObs.observe(processEl);
-
-window.addEventListener('resize', function() {
-    var viewport = document.getElementById('sfViewport');
-    if(!viewport || !sfIframe) return;
-    var scale = Math.min(viewport.offsetWidth/1440, viewport.offsetHeight/900);
-    viewport.style.setProperty('--sf-scale', scale.toFixed(4));
-});
 
 /* ═════════════════════════════════════════════════════════
    AI CHAT ASSISTANT
