@@ -182,73 +182,20 @@ img{display:block;max-width:100%;
 ═══════════════════════════════════════════════ */
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;}
 #webgl{position:absolute;inset:0;z-index:0;pointer-events:none;}
-.hero-inner{
-    position:relative;z-index:2;width:100%;
-    max-width:1560px;margin:0 auto;
-    padding:0 var(--px);
-    padding-top:calc(var(--nav-h) + 3rem);
-    /* Prevent content from touching edges on very small screens */
-    box-sizing:border-box;
-}
-.hero-pre{
-    font-family:var(--font-m);
-    font-size:clamp(.62rem,.85vw,.82rem);
-    color:var(--accent);letter-spacing:.14em;text-transform:uppercase;
-    margin-bottom:1.25rem;opacity:0;transform:translateY(16px);
-    /* Prevent overflow on tiny screens */
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-/* Hero heading — key fix: font scales down aggressively on small screens */
-.hero-h{
-    font-family:var(--font-h);font-weight:800;
-    /* clamp: 2rem min on 320px, 8.5vw fluid, 8.5rem max on wide */
-    font-size:clamp(2rem,13vw,8.5rem);
-    line-height:.92;letter-spacing:-.03em;
-    text-transform:uppercase;margin-bottom:1.75rem;
-    /* Prevent single word from overflowing viewport width */
-    word-break:break-word;overflow-wrap:break-word;
-}
-.hero-h .ln{display:block;overflow:hidden;padding-bottom:.1em;}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1560px;margin:0 auto;padding:0 var(--px);padding-top:calc(var(--nav-h) + 3rem);}
+.hero-pre{font-family:var(--font-m);font-size:clamp(.68rem,.85vw,.85rem);color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:1.75rem;opacity:0;transform:translateY(16px);}
+.hero-h{font-family:var(--font-h);font-weight:800;font-size:clamp(2.6rem,8.5vw,8.5rem);line-height:.9;letter-spacing:-.035em;text-transform:uppercase;margin-bottom:2.25rem;}
+.hero-h .ln{display:block;overflow:hidden;padding-bottom:.12em;}
 .hero-h .lt{display:inline-block;transform:translateY(110%);will-change:transform;}
-.hero-desc{
-    font-size:clamp(.88rem,1.25vw,1.22rem);
-    color:var(--fg-2);max-width:600px;
-    margin-bottom:2.5rem;opacity:0;
-    transform:translateY(16px);line-height:1.6;
-}
-.hero-btns{
-    display:flex;align-items:center;
-    gap:.85rem;flex-wrap:wrap;
-    opacity:0;transform:translateY(16px);
-}
-/* Hero footer — fixed bottom, no overflow */
-.hero-foot{
-    position:absolute;bottom:1.75rem;
-    left:var(--px);right:var(--px);
-    z-index:3;display:flex;align-items:center;
-    justify-content:space-between;
-    font-family:var(--font-m);font-size:.68rem;color:var(--fg-3);
-    gap:.5rem;
-}
+.hero-desc{font-size:clamp(.92rem,1.25vw,1.22rem);color:var(--fg-2);max-width:600px;margin-bottom:3rem;opacity:0;transform:translateY(16px);line-height:1.6;}
+.hero-btns{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;opacity:0;transform:translateY(16px);}
+.hero-foot{position:absolute;bottom:2.25rem;left:var(--px);right:var(--px);z-index:3;display:flex;align-items:center;justify-content:space-between;font-family:var(--font-m);font-size:.7rem;color:var(--fg-3);}
 .hero-foot strong{color:var(--fg-2);font-weight:500;}
-.scroll-tick{display:flex;align-items:center;gap:.6rem;flex-shrink:0;}
-.tick-bar{width:28px;height:1px;background:var(--border);position:relative;overflow:hidden;flex-shrink:0;}
+.scroll-tick{display:flex;align-items:center;gap:.75rem;}
+.tick-bar{width:34px;height:1px;background:var(--border);position:relative;overflow:hidden;}
 .tick-fill{position:absolute;inset:0;background:var(--accent);animation:tickAnim 2.2s cubic-bezier(.65,0,.35,1) infinite;}
 @keyframes tickAnim{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-/* Mobile hero footer: stack cleanly */
-@media(max-width:580px){
-    .hero-foot{
-        flex-direction:column;gap:.3rem;
-        align-items:flex-start;bottom:1rem;
-    }
-    .hero-foot > span:last-child{ display:none; } /* hide STATUS on very small */
-    .hero-pre{ letter-spacing:.08em; }
-}
-/* Extra small: ensure heading never clips */
-@media(max-width:360px){
-    .hero-h{ font-size:clamp(1.8rem,15vw,8.5rem); }
-    .hero-inner{ padding-top:calc(var(--nav-h) + 2rem); }
-}
+@media(max-width:580px){.hero-foot{flex-direction:column;gap:.4rem;align-items:flex-start;bottom:1.2rem;}}
 
 /* ═══════════════════════════════════════════════
    PIVOT
@@ -269,14 +216,73 @@ img{display:block;max-width:100%;
 .sl{font-family:var(--font-m);font-size:.7rem;color:var(--fg-3);text-transform:uppercase;letter-spacing:.08em;margin-top:.35rem;}
 
 /* ═══════════════════════════════════════════════
-   PROOF OF WORK — STANDARD PROJECT CARDS
+   PROOF OF WORK
 ═══════════════════════════════════════════════ */
 .work{background:var(--bg);}
-.work-list{display:flex;flex-direction:column;gap:clamp(5rem,10vw,9rem);margin-top:4rem;}
-.wi{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(2rem,5vw,5.5rem);align-items:center;}
+/* Featured: large 2-col layout */
+.work-featured{display:flex;flex-direction:column;gap:clamp(4rem,8vw,7rem);margin-top:3.5rem;}
+.wi{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center;}
 .wi.flip{grid-template-columns:1fr 1.15fr;}
 .wi.flip .wv{order:2;}
 @media(max-width:1024px){.wi,.wi.flip{grid-template-columns:1fr;gap:2.5rem;}.wi.flip .wv{order:unset;}}
+/* Grid: smaller cards */
+.work-grid-label{
+    font-family:var(--font-m);font-size:.75rem;color:var(--fg-2);
+    text-transform:uppercase;letter-spacing:.16em;
+    display:flex;align-items:center;gap:.8rem;
+    margin:clamp(3rem,6vw,5rem) 0 1.5rem;
+}
+.work-grid-label::before,.work-grid-label::after{content:"";flex:1;height:1px;background:var(--border);}
+.work-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.25rem;
+}
+@media(max-width:900px){.work-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:540px){.work-grid{grid-template-columns:1fr;}}
+/* Grid card */
+.wg-card{
+    position:relative;border-radius:10px;overflow:hidden;
+    border:1px solid var(--border);background:var(--bg-2);
+    display:flex;flex-direction:column;
+    transition:border-color .28s,transform .32s cubic-bezier(.16,1,.3,1),box-shadow .32s;
+    group:1;
+}
+.wg-card:hover{
+    border-color:rgba(0,255,204,.22);
+    transform:translateY(-5px);
+    box-shadow:0 20px 50px rgba(0,0,0,.55),0 0 0 1px rgba(0,255,204,.1);
+}
+.wg-browser{background:var(--bg-3);border-bottom:1px solid var(--border);padding:.5rem .8rem;display:flex;align-items:center;gap:.5rem;flex-shrink:0;}
+.wg-dots{display:flex;gap:.28rem;}
+.wg-dots span{width:8px;height:8px;border-radius:50%;}
+.wg-url{flex:1;font-family:var(--font-m);font-size:.62rem;color:var(--fg-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:.18rem .65rem;}
+.wg-thumb{
+    width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:var(--bg);
+    flex-shrink:0;
+}
+.wg-thumb iframe{
+    width:200%;height:200%;transform:scale(.5);transform-origin:top left;
+    border:none;pointer-events:none;
+}
+.wg-thumb-overlay{
+    position:absolute;inset:0;z-index:2;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(7,7,10,.25);
+    opacity:0;transition:opacity .3s;
+}
+.wg-card:hover .wg-thumb-overlay{opacity:1;}
+.wg-overlay-btn{
+    font-family:var(--font-m);font-size:.68rem;padding:.45rem 1rem;
+    background:rgba(7,7,10,.8);border:1px solid var(--accent);
+    color:var(--accent);border-radius:5px;backdrop-filter:blur(8px);
+    text-decoration:none;
+}
+.wg-info{padding:1rem 1.1rem;flex:1;display:flex;flex-direction:column;gap:.5rem;}
+.wg-name{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--fg);line-height:1.2;}
+.wg-desc{font-size:.78rem;color:var(--fg-3);line-height:1.45;}
+.wg-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.25rem;}
+.wg-tag{font-family:var(--font-m);font-size:.58rem;padding:.15rem .55rem;border:1px solid var(--border-2);border-radius:20px;color:var(--accent);background:rgba(0,255,204,.05);}
 .wv{
     border-radius:10px;overflow:hidden;
     border:1px solid var(--border);
@@ -325,521 +331,151 @@ img{display:block;max-width:100%;
 .w-links{display:flex;gap:1rem;flex-wrap:wrap;}
 
 /* ═══════════════════════════════════════════════
-   PROCESS SHOWCASE — ULTRA MODERN REDESIGN
+   PROCESS SHOWCASE — BROWSER GALLERY
 ═══════════════════════════════════════════════ */
-
-/* Section wrapper */
 .process{
-    background:var(--bg);
-    position:relative;
-    overflow:hidden;
+    background:var(--bg-2);
+    position:relative;overflow:hidden;
     border-top:1px solid var(--border);
     border-bottom:1px solid var(--border);
 }
-
-/* Ambient mesh gradient behind the whole section */
 .process::before{
-    content:"";
-    position:absolute;
-    top:-30%;left:50%;
-    transform:translateX(-50%);
-    width:120%;height:80%;
+    content:"";position:absolute;
+    top:-20%;left:50%;transform:translateX(-50%);
+    width:120%;height:70%;
     background:
-        radial-gradient(ellipse 55% 45% at 20% 50%, rgba(0,255,204,.055) 0%, transparent 70%),
-        radial-gradient(ellipse 45% 55% at 80% 30%, rgba(100,80,255,.045) 0%, transparent 70%);
-    pointer-events:none;
-    z-index:0;
+        radial-gradient(ellipse 50% 50% at 20% 50%,rgba(0,255,204,.055) 0%,transparent 70%),
+        radial-gradient(ellipse 45% 55% at 80% 30%,rgba(100,80,255,.04) 0%,transparent 70%);
+    pointer-events:none;z-index:0;
 }
-.process > .wrap{ position:relative; z-index:1; }
+.process>.wrap{position:relative;z-index:1;}
 
-/* Section label + heading overrides */
-.process .sec-h{
-    font-size:clamp(2rem,5vw,4.5rem);
-    margin-bottom:.75rem;
-}
+/* Section heading */
+.process .sec-h{font-size:clamp(2rem,5vw,4.5rem);margin-bottom:.75rem;}
 .process-intro{
-    font-size:clamp(.92rem,1.1vw,1.08rem);
-    color:var(--fg-3);
-    max-width:520px;
-    line-height:1.65;
+    font-size:clamp(.92rem,1.1vw,1.06rem);color:var(--fg-3);
+    max-width:520px;line-height:1.65;
     margin-bottom:clamp(2rem,3.5vw,3rem);
 }
 
-/* ── Project Selector Cards (replaces plain tabs) ── */
+/* ── Project selector tabs ── */
 .ps-cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:clamp(.6rem,1.2vw,1rem);
+    display:flex;gap:.5rem;flex-wrap:wrap;
     margin-bottom:clamp(1.5rem,3vw,2.5rem);
 }
-@media(max-width:640px){
-    .ps-cards{grid-template-columns:1fr;}
-    .ps-cards{gap:.5rem;}
-}
 
+/* ── Project selector tab style ── */
 .ps-card{
-    position:relative;
-    display:flex;align-items:center;gap:.9rem;
-    padding:clamp(.85rem,1.5vw,1.15rem) clamp(1rem,2vw,1.4rem);
-    background:var(--bg-2);
+    display:inline-flex;align-items:center;gap:.55rem;
+    padding:.55rem 1.1rem;
+    background:var(--bg-3);border:1px solid var(--border);border-radius:8px;
+    font-family:var(--font-m);font-size:.76rem;color:var(--fg-3);
+    cursor:pointer;transition:all .25s;white-space:nowrap;
+}
+.ps-card:hover{border-color:var(--border-2);color:var(--fg-2);}
+.ps-card.active{border-color:var(--accent);background:rgba(0,255,204,.07);color:var(--accent);}
+.ps-icon{display:flex;align-items:center;justify-content:center;width:18px;height:18px;}
+.ps-card-name{font-weight:600;}
+.ps-card-info,.ps-card-desc,.ps-card-stack,.ps-pill{display:none;}
+
+/* ── Showcase: big browser frame ── */
+.showcase-frame{
+    border-radius:14px;overflow:hidden;
     border:1px solid var(--border);
-    border-radius:12px;
-    cursor:pointer;
-    overflow:hidden;
-    transition:
-        border-color .3s cubic-bezier(.16,1,.3,1),
-        background .3s,
-        transform .3s cubic-bezier(.16,1,.3,1),
-        box-shadow .3s cubic-bezier(.16,1,.3,1);
-    text-align:left;
-}
-/* Hover glow shimmer */
-.ps-card::before{
-    content:"";
-    position:absolute;inset:0;
-    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.045) 50%,transparent 70%);
-    transform:translateX(-120%);
-    transition:transform .5s cubic-bezier(.16,1,.3,1);
-    pointer-events:none;
-}
-/* Active indicator line — left edge */
-.ps-card::after{
-    content:"";
-    position:absolute;left:0;top:0;bottom:0;
-    width:2.5px;
-    background:var(--ps-color, var(--accent));
-    transform:scaleY(0);transform-origin:bottom;
-    transition:transform .32s cubic-bezier(.16,1,.3,1);
-    border-radius:0 2px 2px 0;
-}
-.ps-card:hover{
-    border-color:var(--ps-color, rgba(0,255,204,.3));
-    background:rgba(255,255,255,.025);
-    transform:translateY(-2px);
-    box-shadow:0 12px 36px rgba(0,0,0,.4), 0 0 0 1px var(--ps-color,rgba(0,255,204,.08));
-}
-.ps-card:hover::before{ transform:translateX(120%); }
-.ps-card.active{
-    border-color:var(--ps-color, var(--accent));
-    background:rgba(0,255,204,.04);
-    box-shadow:0 8px 32px rgba(0,0,0,.35), 0 0 0 1px var(--ps-color,rgba(0,255,204,.14));
-}
-.ps-card.active::after{ transform:scaleY(1); }
-
-/* Project icon badge */
-.ps-icon{
-    width:clamp(36px,4vw,46px);
-    height:clamp(36px,4vw,46px);
-    border-radius:10px;
-    display:flex;align-items:center;justify-content:center;
-    font-size:clamp(1rem,1.5vw,1.35rem);
-    flex-shrink:0;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    transition:background .3s, border-color .3s, transform .3s cubic-bezier(.16,1,.3,1);
-}
-.ps-card.active .ps-icon{
-    background:rgba(0,255,204,.1);
-    border-color:var(--ps-color, rgba(0,255,204,.3));
-    transform:scale(1.08);
-}
-.ps-card-info{ display:flex;flex-direction:column;gap:.18rem;min-width:0; }
-.ps-card-name{
-    font-family:var(--font-h);
-    font-size:clamp(.82rem,1vw,.95rem);
-    font-weight:700;
-    color:var(--fg);
-    line-height:1.2;
-    transition:color .3s;
-}
-.ps-card.active .ps-card-name{ color:var(--ps-color, var(--accent)); }
-.ps-card-desc{
-    font-family:var(--font-m);
-    font-size:clamp(.6rem,.7vw,.68rem);
-    color:var(--fg-3);
-    line-height:1.3;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.ps-card-stack{
-    display:flex;gap:.3rem;margin-top:.35rem;flex-wrap:wrap;
-}
-.ps-pill{
-    font-family:var(--font-m);
-    font-size:.56rem;
-    padding:.15rem .5rem;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:20px;
-    color:var(--fg-3);
-    letter-spacing:.04em;
-    white-space:nowrap;
-}
-.ps-card.active .ps-pill{
-    background:rgba(0,255,204,.08);
-    border-color:rgba(0,255,204,.18);
-    color:var(--ps-color, var(--accent));
-}
-
-/* ── Main split: Editor LEFT + Preview RIGHT ── */
-.process-split{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    height:clamp(440px,56vw,640px);
-    border-radius:16px;
-    overflow:hidden;
-    /* Layered border + glow */
-    box-shadow:
-        0 0 0 1px var(--border),
-        0 0 0 4px rgba(0,0,0,.5),
-        0 32px 80px rgba(0,0,0,.6),
-        inset 0 1px 0 rgba(255,255,255,.04);
+    box-shadow:0 0 0 1px rgba(0,0,0,.5),0 32px 80px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.04);
+    background:var(--bg-3);
     position:relative;
 }
-@media(max-width:900px){
-    .process-split{
-        grid-template-columns:1fr;
-        grid-template-rows:1fr 1fr;
-        height:auto;
-        border-radius:12px;
-    }
-}
-@media(max-width:600px){
-    .process-split{ border-radius:10px; }
-}
-
-/* ── LEFT: Code Editor Panel ── */
-.ce-panel{
-    background:#0d1117;
-    display:flex;flex-direction:column;
-    border-right:1px solid rgba(255,255,255,.07);
-    overflow:hidden;
-    min-height:0;
-    position:relative;
-}
-@media(max-width:900px){
-    .ce-panel{border-right:none;border-bottom:1px solid rgba(255,255,255,.07);height:clamp(280px,45vw,400px);}
-}
-@media(max-width:600px){ .ce-panel{height:300px;} }
-
-/* Editor topbar */
-.ce-topbar{
-    display:flex;align-items:center;
-    padding:0 1rem;
-    height:42px;
+/* Browser chrome bar */
+.sf-bar{
+    display:flex;align-items:center;gap:.7rem;
+    padding:.65rem 1rem;
     background:#161b22;
     border-bottom:1px solid rgba(255,255,255,.07);
-    flex-shrink:0;
-    gap:.75rem;
 }
-.ce-dots{ display:flex;gap:.4rem; }
-.ce-dot{ width:11px;height:11px;border-radius:50%; }
-
-/* Tab strip inside editor */
-.ce-tabs{
-    display:flex;align-items:center;gap:0;
-    flex:1;overflow:hidden;
-    height:100%;
+.sf-dots{display:flex;gap:.35rem;}
+.sf-dot{width:11px;height:11px;border-radius:50%;}
+.sf-url{
+    flex:1;display:flex;align-items:center;gap:.5rem;
+    background:#0d1117;border:1px solid rgba(255,255,255,.08);
+    border-radius:6px;padding:.32rem .85rem;
+    font-family:var(--font-code);font-size:.68rem;color:#6e7681;
+    max-width:420px;overflow:hidden;
 }
-.ce-tab{
-    display:flex;align-items:center;gap:.4rem;
-    padding:0 1rem;height:100%;
-    font-family:var(--font-code);
-    font-size:.7rem;color:rgba(255,255,255,.35);
-    border-right:1px solid rgba(255,255,255,.06);
-    white-space:nowrap;
-    position:relative;
-    transition:color .2s, background .2s;
+.sf-url-lock{color:#28c840;flex-shrink:0;display:flex;}
+.sf-url-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sf-live{
+    display:flex;align-items:center;gap:.45rem;margin-left:auto;
+    font-family:var(--font-m);font-size:.65rem;color:#3d4f6b;
 }
-.ce-tab.ce-tab-active{
-    color:#c9d1d9;
-    background:rgba(255,255,255,.04);
-}
-.ce-tab.ce-tab-active::before{
-    content:"";
-    position:absolute;top:0;left:0;right:0;height:2px;
-    background:var(--accent);
-}
-.ce-tab-dot{ width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.7; }
-.ce-tab-icon{ opacity:.6;font-size:.65rem; }
-
-.ce-lang-badge{
-    font-family:var(--font-m);font-size:.6rem;
-    padding:.2rem .55rem;border-radius:4px;
-    background:rgba(0,255,204,.12);color:var(--accent);
-    border:1px solid rgba(0,255,204,.22);
-    flex-shrink:0;white-space:nowrap;
-    letter-spacing:.04em;
-    margin-left:auto;
-}
-@media(max-width:400px){.ce-lang-badge{display:none;}}
-
-/* Editor code area */
-.ce-body{display:flex;flex:1;overflow:hidden;min-height:0;}
-
-.ce-gutter{
-    width:clamp(32px,4vw,52px);
-    background:#0d1117;
-    padding:.85rem 0;
-    display:flex;flex-direction:column;align-items:flex-end;
-    border-right:1px solid #1e2430;
-    flex-shrink:0;overflow:hidden;
-}
-.ce-ln{
-    font-family:var(--font-code);
-    font-size:clamp(.56rem,.65vw,.68rem);
-    color:#3d4f6b;
-    line-height:1.8;
-    padding-right:.6rem;
-    min-height:1.8em;
-    user-select:none;
-    transition:color .15s;
-}
-.ce-ln.hl{color:#6e7681;}
-
-.ce-code{
-    flex:1;
-    padding:.85rem 1rem;
-    overflow:auto;
-    font-family:var(--font-code);
-    font-size:clamp(.6rem,.7vw,.76rem);
-    line-height:1.8;
-    white-space:pre;
-    min-width:0;
-    color:#c9d1d9;
-}
-.ce-code::-webkit-scrollbar{width:4px;height:4px;}
-.ce-code::-webkit-scrollbar-track{background:transparent;}
-.ce-code::-webkit-scrollbar-thumb{background:#21262d;border-radius:2px;}
-
-/* Syntax highlight tokens */
-.t-kw  {color:#ff7b72;}
-.t-fn  {color:#d2a8ff;}
-.t-str {color:#a5d6ff;}
-.t-val {color:#79c0ff;}
-.t-com {color:#8b949e;font-style:italic;}
-.t-op  {color:#ff7b72;}
-.t-tag {color:#7ee787;}
-.t-attr{color:#79c0ff;}
-.t-plain{color:#c9d1d9;}
-
-/* Blinking caret */
-.ce-caret{
-    display:inline-block;width:2px;height:1.1em;
-    background:var(--accent);vertical-align:middle;
-    animation:ceBlink .9s step-end infinite;
-    margin-left:1px;box-shadow:0 0 6px rgba(0,255,204,.5);
-}
-@keyframes ceBlink{0%,100%{opacity:1;}50%{opacity:0;}}
-.ce-row{display:block;min-height:1.8em;}
-.ce-row.hl-row{background:rgba(255,255,255,.025);border-left:2px solid var(--accent);}
-
-/* Status bar at bottom of editor */
-.ce-statusbar{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:0 1rem;
-    height:26px;
-    background:#1e2530;
-    border-top:1px solid rgba(255,255,255,.06);
-    flex-shrink:0;
-    font-family:var(--font-code);
-    font-size:.58rem;
-    color:#6e7681;
-    gap:.5rem;
-}
-.ce-statusbar-left,.ce-statusbar-right{display:flex;align-items:center;gap:.8rem;}
-.ce-status-dot{
-    width:6px;height:6px;border-radius:50%;
-    background:var(--accent);
-    box-shadow:0 0 5px var(--accent);
+.sf-live-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:#28c840;box-shadow:0 0 6px #28c840;
     animation:pvPulse 2s ease infinite;
 }
+@keyframes pvPulse{0%,100%{box-shadow:0 0 4px #28c840;}50%{box-shadow:0 0 12px #28c840,0 0 20px rgba(40,200,64,.3);}}
 
-/* ── RIGHT: Live Preview Panel ── */
-.pv-panel{
-    background:#0a0a0f;
-    display:flex;flex-direction:column;
-    overflow:hidden;min-height:0;
+/* Iframe viewport */
+.sf-viewport{
     position:relative;
+    width:100%;
+    height:clamp(380px,52vw,620px);
+    overflow:hidden;background:#0a0a0f;
 }
-@media(max-width:900px){.pv-panel{height:clamp(300px,50vw,420px);}}
-@media(max-width:600px){.pv-panel{height:340px;}}
-
-/* Preview topbar */
-.pv-topbar{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:0 1rem;
-    height:42px;
-    background:#161b22;
-    border-bottom:1px solid rgba(255,255,255,.07);
-    flex-shrink:0;
-    gap:.6rem;
-}
-.pv-url-bar{
-    flex:1;
-    display:flex;align-items:center;gap:.5rem;
-    background:#0d1117;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:6px;
-    padding:.3rem .75rem;
-    max-width:280px;
-    font-family:var(--font-code);
-    font-size:.65rem;
-    color:#6e7681;
-    overflow:hidden;
-}
-.pv-url-bar span{
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-.pv-url-lock{
-    flex-shrink:0;
-    color:#28c840;
-    font-size:.7rem;
-}
-.pv-live{
-    width:8px;height:8px;border-radius:50%;
-    background:#28c840;
-    box-shadow:0 0 7px #28c840;
-    animation:pvPulse 2s ease infinite;
-    flex-shrink:0;
-}
-@keyframes pvPulse{0%,100%{box-shadow:0 0 4px #28c840;}50%{box-shadow:0 0 12px #28c840,0 0 22px rgba(40,200,64,.3);}}
-
-.pv-title{
-    font-family:var(--font-m);
-    font-size:clamp(.58rem,.68vw,.7rem);
-    color:#6e7681;
-    display:flex;align-items:center;gap:.45rem;
-    white-space:nowrap;
-}
-.pv-hint{
-    font-size:.58rem;color:#3d4f6b;
-    display:none;white-space:nowrap;
-}
-@media(min-width:480px){.pv-hint{display:inline;}}
-
-.pv-body{flex:1;overflow:hidden;position:relative;min-height:0;}
-.pv-frame{position:absolute;inset:0;}
-
-/* Live iframe wrapper */
-.pv-iframe-wrap{
-    position:absolute;inset:0;
-    background:#0a0a0f;
-    overflow:hidden;
-}
-.pv-iframe-wrap iframe{
-    position:absolute;
-    /* Render full-width desktop site at 1400px, scale down to fit panel */
-    width:1400px;
-    height:900px;
-    top:0;left:0;
-    border:none;
-    pointer-events:none;
-    /* Scale to fill panel — transform-origin top-left */
+.sf-viewport iframe{
+    position:absolute;top:0;left:0;
+    width:1440px;height:900px;
+    border:none;pointer-events:none;
     transform-origin:top left;
-    transform:scale(var(--pv-scale, 0.45));
-    transition:opacity .4s ease;
+    transform:scale(var(--sf-scale,.4));
+    transition:opacity .45s ease;
     opacity:0;
 }
-.pv-iframe-wrap iframe.loaded{ opacity:1; }
+.sf-viewport iframe.sf-loaded{opacity:1;}
 
-/* Loading spinner overlay */
-.pv-loading{
-    position:absolute;inset:0;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    gap:1rem;
-    background:#0a0a0f;
-    z-index:2;
-    font-family:var(--font-m);
-    font-size:.72rem;
-    color:#6e7681;
-    letter-spacing:.06em;
-    transition:opacity .3s ease;
+/* Loading state */
+.sf-loading{
+    position:absolute;inset:0;z-index:3;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.85rem;
+    background:#0a0a0f;transition:opacity .3s;
+    font-family:var(--font-m);font-size:.7rem;color:#4a4a5e;letter-spacing:.06em;
 }
-.pv-loading.hidden{opacity:0;pointer-events:none;}
-.pv-loading-ring{
-    width:28px;height:28px;
-    border:2px solid #21262d;
-    border-top-color:var(--accent);
-    border-radius:50%;
-    animation:pvSpin .9s linear infinite;
+.sf-loading.sf-done{opacity:0;pointer-events:none;}
+.sf-spinner{
+    width:26px;height:26px;border-radius:50%;
+    border:2px solid #1e2430;border-top-color:var(--accent);
+    animation:sfSpin .85s linear infinite;
 }
-@keyframes pvSpin{to{transform:rotate(360deg);}}
+@keyframes sfSpin{to{transform:rotate(360deg);}}
 
-/* Open-site overlay button */
-.pv-open-btn{
-    position:absolute;
-    bottom:1rem;right:1rem;
-    z-index:5;
-    display:flex;align-items:center;gap:.4rem;
-    padding:.45rem .9rem;
-    background:rgba(7,7,10,.85);
-    border:1px solid rgba(0,255,204,.25);
+/* Open site button */
+.sf-open{
+    position:absolute;bottom:1rem;right:1rem;z-index:4;
+    display:inline-flex;align-items:center;gap:.45rem;
+    padding:.5rem 1rem;
+    background:rgba(7,7,10,.88);
+    border:1px solid rgba(0,255,204,.3);
     border-radius:6px;
-    font-family:var(--font-m);font-size:.68rem;
-    color:var(--accent);
-    backdrop-filter:blur(10px);
-    transition:background .2s, border-color .2s, transform .2s;
-    text-decoration:none;
+    font-family:var(--font-m);font-size:.7rem;color:var(--accent);
+    text-decoration:none;backdrop-filter:blur(12px);
+    transition:background .22s,color .22s,transform .22s;
 }
-.pv-open-btn:hover{
-    background:var(--accent);
-    color:var(--bg);
-    border-color:var(--accent);
-    transform:translateY(-2px);
+.sf-open:hover{background:var(--accent);color:var(--bg);transform:translateY(-2px);}
+
+/* Project meta below frame */
+.showcase-meta{
+    display:grid;grid-template-columns:1fr auto;
+    align-items:start;gap:1.5rem;
+    padding:1.5rem 0 0;
 }
-
-/* Fade-in for content swap */
-@keyframes pvFadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
-
-/* ── Preview UIs ── */
-@media(max-width:600px){
-    .tp-preview,.ls-preview,.rm-preview{font-size:85%;}
-    .tp-services{grid-template-columns:repeat(2,1fr);}
-    .ls-grid{grid-template-columns:1fr 1fr;}
-    .rm-services{grid-template-columns:repeat(2,1fr);}
-    .ls-sidebar{width:36px;}
-    .ls-si{width:26px;height:26px;font-size:.7rem;}
-}
-
-/* TechPanda preview */
-.tp-preview{font-family:sans-serif;background:#0a1628;color:#e0e6f0;min-height:100%;display:flex;flex-direction:column;}
-.tp-nav{background:#0d1f3c;padding:.6rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);}
-.tp-logo{color:#00d4ff;font-weight:700;font-size:.85rem;letter-spacing:.05em;}
-.tp-nav-links{display:flex;gap:.8rem;font-size:.65rem;color:rgba(255,255,255,.5);}
-.tp-hero{padding:2.5rem 1.2rem;background:linear-gradient(135deg,#0d1f3c 0%,#0a1628 100%);text-align:center;border-bottom:1px solid rgba(255,255,255,.06);}
-.tp-hero-h{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.5rem;letter-spacing:-.01em;}
-.tp-hero-sub{font-size:.68rem;color:#8899aa;margin-bottom:1rem;}
-.tp-cta{display:inline-block;padding:.4rem 1rem;background:#00d4ff;color:#0a1628;font-size:.68rem;font-weight:700;border-radius:3px;}
-.tp-services{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;padding:1rem 1.2rem;}
-.tp-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:.7rem;text-align:center;}
-.tp-card-icon{font-size:1.1rem;margin-bottom:.3rem;}
-.tp-card-title{font-size:.65rem;font-weight:600;color:#e0e6f0;margin-bottom:.2rem;}
-.tp-card-sub{font-size:.58rem;color:#6677aa;}
-
-/* Learn Setu preview */
-.ls-preview{background:#1a1a2e;min-height:100%;display:flex;gap:0;font-family:sans-serif;color:#eee;}
-.ls-sidebar{width:48px;background:#16213e;display:flex;flex-direction:column;align-items:center;padding:.6rem 0;gap:.5rem;border-right:1px solid rgba(255,255,255,.06);}
-.ls-si{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:rgba(255,255,255,.4);transition:all .2s;}
-.ls-si.active{background:rgba(0,255,204,.15);color:#00ffcc;}
-.ls-main{flex:1;padding:1rem;overflow:auto;}
-.ls-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
-.ls-title{font-size:.9rem;font-weight:700;color:#fff;}
-.ls-badge{font-size:.58rem;padding:.2rem .5rem;background:rgba(0,255,204,.15);color:#00ffcc;border-radius:10px;border:1px solid rgba(0,255,204,.2);}
-.ls-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.8rem;}
-.ls-widget{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.6rem;position:relative;overflow:hidden;}
-.ls-widget-title{font-size:.6rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem;}
-.ls-widget-val{font-size:1rem;font-weight:700;color:#fff;}
-.ls-widget-sub{font-size:.58rem;color:rgba(255,255,255,.3);margin-top:.1rem;}
-.ls-widget-bar{height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:.4rem;overflow:hidden;}
-.ls-widget-fill{height:100%;background:linear-gradient(90deg,#00ffcc,#0099ff);border-radius:2px;}
-.ls-ai{background:linear-gradient(135deg,rgba(0,255,204,.1),rgba(0,153,255,.1));border:1px solid rgba(0,255,204,.2);border-radius:8px;padding:.6rem;}
-.ls-ai-head{font-size:.6rem;color:#00ffcc;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem;}
-.ls-ai-text{font-size:.65rem;color:rgba(255,255,255,.6);line-height:1.4;}
-
-/* Rajput Mobile preview */
-.rm-preview{background:#111;min-height:100%;font-family:sans-serif;color:#eee;}
-.rm-nav{background:#1a1a1a;padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);}
-.rm-logo{color:#f5a623;font-weight:700;font-size:.8rem;}
+@media(max-width:600px){.showcase-meta{grid-template-columns:1fr;gap:1rem;}}
+.sm-info{display:flex;flex-direction:column;gap:.4rem;}
+.sm-title{font-family:var(--font-h);font-size:clamp(1.1rem,2vw,1.55rem);font-weight:800;color:var(--fg);letter-spacing:-.02em;}
+.sm-desc{font-size:clamp(.82rem,.95vw,.94rem);color:var(--fg-2);line-height:1.55;max-width:580px;}
+.sm-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.3rem;}
+.sm-tag{font-family:var(--font-m);font-size:.65rem;padding:.22rem .7rem;border:1px solid var(--border-2);border-radius:20px;color:var(--accent);background:rgba(0,255,204,.05);}
+.sm-link{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.4rem;border-radius:7px;border:1px solid var(--accent);background:rgba(0,255,204,.07);font-family:var(--font-m);font-size:.76rem;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;align-self:flex-start;transition:background .22s,transform .22s;}
+.sm-link:hover{background:var(--accent);color:var(--bg);transform:translateY(-2px);}
 .rm-hero{background:linear-gradient(135deg,#1a1a1a,#2a1a0a);padding:1.5rem 1rem;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);}
 .rm-h{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.3rem;}
 .rm-sub{font-size:.65rem;color:#888;margin-bottom:.8rem;}
@@ -1553,8 +1189,7 @@ img{display:block;max-width:100%;
 ═══════════════════════════════════════════════ */
 .contact{
     background:var(--bg);
-    /* Top stays generous, bottom is tight — footer is the last element */
-    padding:clamp(4rem,8vw,9rem) 0 clamp(1.5rem,3vw,2.5rem);
+    padding:clamp(5rem,10vw,10rem) 0 clamp(3rem,6vw,5rem);
     text-align:center;
     position:relative;
     overflow:hidden;
@@ -1766,13 +1401,12 @@ img{display:block;max-width:100%;
 /* ── Footer bar ── */
 .foot{
     border-top:1px solid var(--border);
-    padding-top:clamp(1.25rem,2.5vw,2rem);
-    /* NO bottom padding — section handles it */
+    padding-top:clamp(1.5rem,3vw,2.5rem);
     display:flex;align-items:center;justify-content:space-between;
-    font-family:var(--font-m);font-size:clamp(.64rem,.78vw,.74rem);
-    color:var(--fg-3);flex-wrap:wrap;gap:.75rem;
+    font-family:var(--font-m);font-size:clamp(.66rem,.78vw,.74rem);
+    color:var(--fg-3);flex-wrap:wrap;gap:1rem;
 }
-.foot-status{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;}
+.foot-status{display:flex;align-items:center;gap:.5rem;}
 .s-dot{
     width:7px;height:7px;
     background:var(--accent);border-radius:50%;
@@ -2117,7 +1751,7 @@ img{display:block;max-width:100%;
             <span class="ln"><span class="lt">SHUBHANSHU</span></span>
             <span class="ln"><span class="lt">TIWARI.</span></span>
         </h1>
-        <p class="hero-desc">Bridging 2 years of enterprise precision with next-generation software engineering, offline-first systems, and elite AI prompt architectures.</p>
+        <p class="hero-desc">Bridging 12 years of enterprise precision with next-generation software engineering, offline-first systems, and elite AI prompt architectures.</p>
         <div class="hero-btns">
             <a href="#work" class="btn mag"><span>View Proof of Work</span></a>
             <a href="#contact" class="btn btn-ghost mag"><span>Contact Directly</span></a>
@@ -2136,16 +1770,16 @@ img{display:block;max-width:100%;
         <div class="eyebrow">01 // The Pivot</div>
         <div class="pivot-g">
             <div><div class="pivot-sticky">
-                <h2 class="pivot-h" id="pivot-headline"> 2 YEARS IN<br>ENTERPRISE.<br>0 REGRETS.<br><em>100% INTENTIONAL.</em></h2>
+                <h2 class="pivot-h" id="pivot-headline">12 YEARS IN<br>ENTERPRISE.<br>0 REGRETS.<br><em>100% INTENTIONAL.</em></h2>
             </div></div>
             <div>
                 <div class="pivot-ps">
-                    <p class="pivot-p">Most software engineering portfolios hide past non-tech careers. <strong>I consider mine an unfair advantage.</strong> For nearly 2 years at Reliance Industries, and currently in procurement at Siemens India, I mastered what most engineers take a decade to learn: extreme operational rigor, navigating complex constraints, and high-stakes project management.</p>
+                    <p class="pivot-p">Most software engineering portfolios hide past non-tech careers. <strong>I consider mine an unfair advantage.</strong> For nearly 12 years at Reliance Industries, and currently in procurement at Siemens India, I mastered what most engineers take a decade to learn: extreme operational rigor, navigating complex constraints, and high-stakes project management.</p>
                     <p class="pivot-p">My transition into software engineering is not an accident — it is a <strong>deliberate, high-agency decision.</strong> Currently pursuing my BCA at Tilak Maharashtra Vidyapeeth (2023–2026), I bring enterprise discipline directly into codebase architecture.</p>
                     <p class="pivot-p">I don't just write code to pass tests. I architect robust systems designed for real-world business realities, unpredictable offline environments, and the rapidly accelerating AI frontier.</p>
                 </div>
                 <div class="pivot-stats">
-                    <div><div class="sv" data-target="2">0</div><div class="sl">Yrs Enterprise</div></div>
+                    <div><div class="sv" data-target="12">0</div><div class="sl">Yrs Enterprise</div></div>
                     <div><div class="sv" data-target="100">0</div><div class="sl">AI Models Used</div></div>
                     <div><div class="sv" data-target="3">0</div><div class="sl">Live Products</div></div>
                 </div>
@@ -2159,208 +1793,202 @@ img{display:block;max-width:100%;
     <div class="wrap">
         <div class="eyebrow">02 // Proof of Work</div>
         <h2 class="sec-h">ENGINEERING BEYOND<br>THE HAPPY PATH.</h2>
-        <div class="work-list">
+
+        <!-- FEATURED PROJECTS: Large case-study layout -->
+        <div class="work-featured">
+
+            <!-- P1: TechPanda -->
             <div class="wi" id="p1">
                 <div class="wv"><div class="wv-inner">
                     <div class="b-bar"><div class="b-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="b-url">techpanda.co.in</div></div>
-                    <div class="b-body"><iframe src="https://techpanda.co.in" title="TechPanda Live Preview" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" aria-label="TechPanda live preview"></iframe><div class="b-hover"><a href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer" class="b-badge" style="cursor:pointer;">OPEN LIVE SITE ↗</a></div></div>
+                    <div class="b-body"><iframe src="https://techpanda.co.in" title="TechPanda Live Preview" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe><div class="b-hover"><a href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer" class="b-badge" style="cursor:pointer;">OPEN LIVE SITE ↗</a></div></div>
                 </div></div>
                 <div class="wc">
-                    <div class="w-num">01 // TECHPANDA ENGINEERING CONSULTANCY</div>
-                    <h3 class="w-title">techpanda.co.in</h3>
+                    <div class="w-num">01 // CORPORATE SITE · INTERNSHIP BUILD</div>
+                    <h3 class="w-title">TechPanda Engineering</h3>
                     <div class="w-think">
-                        <div class="w-step"><span class="w-lbl">The Constraint</span><p class="w-body">3-month internship. Full corporate digital presence from zero, solo. HVAC, MEP, electrical, plumbing, turnkey — strict performance budgets, zero existing brand assets.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Decision</span><p class="w-body">Bypassed JS frameworks entirely. Ultra-performant semantic HTML5, CSS Grid/Flexbox, native JS. Deep schema markup for pristine Core Web Vitals from day one.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Outcome</span><p class="w-body">Lightning-fast, fully responsive corporate platform achieving immediate organic indexation — driving client discovery and institutional credibility.</p></div>
+                        <div class="w-step"><span class="w-lbl">The Constraint</span><p class="w-body">3-month internship. Full corporate digital presence from zero, solo — HVAC, MEP, electrical, plumbing, turnkey services. Zero existing brand assets.</p></div>
+                        <div class="w-step"><span class="w-lbl">The Decision</span><p class="w-body">No frameworks. Semantic HTML5, CSS Grid/Flexbox, native JS. Deep schema markup for pristine Core Web Vitals from day one.</p></div>
+                        <div class="w-step"><span class="w-lbl">The Outcome</span><p class="w-body">Lightning-fast, responsive corporate platform achieving immediate organic indexation — driving real client discovery.</p></div>
                     </div>
-                    <div class="w-tags"><span class="tag">Vanilla JS</span><span class="tag">CSS Grid/Flex</span><span class="tag">SEO Optimized</span><span class="tag">Semantic HTML5</span><span class="tag">Solo Build</span></div>
-                    <div class="w-links"><a href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer" class="btn mag"><span>View Live Site ↗</span></a></div>
+                    <div class="w-tags"><span class="tag">Vanilla JS</span><span class="tag">CSS Grid</span><span class="tag">SEO</span><span class="tag">Semantic HTML5</span></div>
+                    <div class="w-links"><a href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer" class="btn mag"><span>View Live ↗</span></a></div>
                 </div>
             </div>
+
+            <!-- P2: Learn Setu -->
             <div class="wi flip" id="p2">
                 <div class="wv"><div class="wv-inner">
                     <div class="b-bar"><div class="b-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="b-url">learnsetu.app — Flutter + Supabase</div></div>
                     <div class="b-body img-mode">
-                        <img id="learnSetuImg" src="lslogo.png" alt="Learn Setu AI Study App" loading="lazy">
+                        <img id="learnSetuImg" src="learn-setu-banner.png" alt="Learn Setu AI Study App" loading="lazy">
                         <div class="b-hover"><span class="b-badge">FLUTTER + SUPABASE</span></div>
                     </div>
                 </div></div>
                 <div class="wc">
-                    <div class="w-num">02 // FINAL-YEAR SYSTEM BUILD</div>
+                    <div class="w-num">02 // FINAL-YEAR SYSTEM BUILD · CROSS-PLATFORM</div>
                     <h3 class="w-title">Learn Setu</h3>
                     <div class="w-think">
-                        <div class="w-step"><span class="w-lbl">The Constraint</span><p class="w-body">Digital learners face extreme platform fragmentation and intermittent connectivity — traditional cloud-only tools fail completely offline.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Decision</span><p class="w-body">Offline-first: Flutter + Supabase, local data hydration, optimistic UI mutations, background reconciliation daemons that heal on reconnection.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Outcome</span><p class="w-body">AI Tutor, Science Labs, Smart Analytics, Gamified streaks — across Android, iOS, Web &amp; Desktop. Zero data loss regardless of network state.</p></div>
+                        <div class="w-step"><span class="w-lbl">The Constraint</span><p class="w-body">Platform fragmentation + intermittent connectivity in developing regions — cloud-only tools fail completely offline.</p></div>
+                        <div class="w-step"><span class="w-lbl">The Decision</span><p class="w-body">Offline-first Flutter + Supabase. Local data hydration, optimistic UI, background reconciliation daemons on reconnect.</p></div>
+                        <div class="w-step"><span class="w-lbl">The Outcome</span><p class="w-body">AI Tutor, Science Labs, Smart Analytics, Gamified streaks — Android, iOS, Web &amp; Desktop. Zero data loss offline.</p></div>
                     </div>
-                    <div class="w-tags"><span class="tag">Flutter</span><span class="tag">Supabase</span><span class="tag">Offline-First</span><span class="tag">AI-Powered</span><span class="tag">Cross-Platform</span></div>
+                    <div class="w-tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Supabase</span><span class="tag">Offline-First</span><span class="tag">AI-Powered</span></div>
                     <div class="w-links"><a href="#contact" class="btn mag"><span>Request Demo</span></a></div>
                 </div>
             </div>
+
+            <!-- P3: Rajput Mobile -->
             <div class="wi" id="p3">
                 <div class="wv"><div class="wv-inner">
                     <div class="b-bar"><div class="b-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="b-url">rajputmobile.shop</div></div>
-                    <div class="b-body"><iframe src="https://rajputmobile.shop/" title="Rajput Mobile Care Live Preview" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" aria-label="Rajput Mobile Care preview"></iframe><div class="b-hover"><a href="https://rajputmobile.shop/" target="_blank" rel="noopener noreferrer" class="b-badge" style="cursor:pointer;">OPEN LIVE SITE ↗</a></div></div>
+                    <div class="b-body"><iframe src="https://rajputmobile.shop/" title="Rajput Mobile Care" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no"></iframe><div class="b-hover"><a href="https://rajputmobile.shop/" target="_blank" rel="noopener noreferrer" class="b-badge" style="cursor:pointer;">OPEN LIVE SITE ↗</a></div></div>
                 </div></div>
                 <div class="wc">
-                    <div class="w-num">03 // LOCAL BUSINESS DIGITAL LAUNCH</div>
+                    <div class="w-num">03 // LOCAL BUSINESS · DIGITAL LAUNCH</div>
                     <h3 class="w-title">Rajput Mobile Care</h3>
                     <div class="w-think">
-                        <div class="w-step"><span class="w-lbl">The Constraint</span><p class="w-body">19+ year trusted mobile repair shop in Sillod — zero digital presence, no discovery pathway beyond walk-ins.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Decision</span><p class="w-body">Cinematic, premium business site elevating the brand to match the real-world trust earned. Service clarity, local SEO, mobile-first UX.</p></div>
-                        <div class="w-step"><span class="w-lbl">The Outcome</span><p class="w-body">Conversion-optimized storefront: all repair services, accessories, brand trust signals, testimonials — Sillod's most trusted hub, now online.</p></div>
+                        <div class="w-step"><span class="w-lbl">The Constraint</span><p class="w-body">19+ year trusted repair shop — zero digital presence, no discovery pathway beyond walk-ins.</p></div>
+                        <div class="w-step"><span class="w-lbl">The Decision</span><p class="w-body">Conversion-first design with local SEO dominance. Premium brand elevation to match real-world trust.</p></div>
+                        <div class="w-step"><span class="w-lbl">The Outcome</span><p class="w-body">Repair services, accessories, testimonials, trust signals — Sillod's most trusted hub, now online.</p></div>
                     </div>
-                    <div class="w-tags"><span class="tag">Business Site</span><span class="tag">Local SEO</span><span class="tag">Mobile-First</span><span class="tag">Conversion UX</span></div>
-                    <div class="w-links"><a href="https://rajputmobile.shop/" target="_blank" rel="noopener noreferrer" class="btn mag"><span>View Live Site ↗</span></a></div>
+                    <div class="w-tags"><span class="tag">Local SEO</span><span class="tag">Mobile-First</span><span class="tag">Conversion UX</span></div>
+                    <div class="w-links"><a href="https://rajputmobile.shop/" target="_blank" rel="noopener noreferrer" class="btn mag"><span>View Live ↗</span></a></div>
                 </div>
             </div>
+
+        </div>
+
+        <!-- MORE PROJECTS: Grid of live previews -->
+        <div class="work-grid-label">More Live Projects</div>
+        <div class="work-grid">
+
+            <div class="wg-card">
+                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">lagnadeep.vercel.app</div></div>
+                <div class="wg-thumb"><iframe src="https://lagnadeep.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="Lagnadeep"></iframe><div class="wg-thumb-overlay"><a href="https://lagnadeep.vercel.app/" target="_blank" rel="noopener noreferrer" class="wg-overlay-btn">Open Site ↗</a></div></div>
+                <div class="wg-info"><div class="wg-name">Lagnadeep</div><div class="wg-desc">Wedding &amp; event platform with elegant, conversion-focused design.</div><div class="wg-tags"><span class="wg-tag">Events</span><span class="wg-tag">Web</span><span class="wg-tag">UI/UX</span></div></div>
+            </div>
+
+            <div class="wg-card">
+                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">unisex-salonn.vercel.app</div></div>
+                <div class="wg-thumb"><iframe src="https://unisex-salonn.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="Unisex Salon"></iframe><div class="wg-thumb-overlay"><a href="https://unisex-salonn.vercel.app/" target="_blank" rel="noopener noreferrer" class="wg-overlay-btn">Open Site ↗</a></div></div>
+                <div class="wg-info"><div class="wg-name">Unisex Salon</div><div class="wg-desc">Premium salon booking site with service showcase and modern aesthetic.</div><div class="wg-tags"><span class="wg-tag">Beauty</span><span class="wg-tag">Local Business</span></div></div>
+            </div>
+
+            <div class="wg-card">
+                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">ricciscafe.vercel.app</div></div>
+                <div class="wg-thumb"><iframe src="https://ricciscafe.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="Ricci's Cafe"></iframe><div class="wg-thumb-overlay"><a href="https://ricciscafe.vercel.app/" target="_blank" rel="noopener noreferrer" class="wg-overlay-btn">Open Site ↗</a></div></div>
+                <div class="wg-info"><div class="wg-name">Ricci's Cafe</div><div class="wg-desc">Restaurant &amp; cafe brand site with menu, atmosphere, and online presence.</div><div class="wg-tags"><span class="wg-tag">Food &amp; Beverage</span><span class="wg-tag">Brand</span></div></div>
+            </div>
+
+            <div class="wg-card">
+                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">friendscaffe.vercel.app</div></div>
+                <div class="wg-thumb"><iframe src="https://friendscaffe.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="Friends Caffe"></iframe><div class="wg-thumb-overlay"><a href="https://friendscaffe.vercel.app/" target="_blank" rel="noopener noreferrer" class="wg-overlay-btn">Open Site ↗</a></div></div>
+                <div class="wg-info"><div class="wg-name">Friends Caffe</div><div class="wg-desc">Cozy cafe digital presence — menu, ambiance, and social discovery.</div><div class="wg-tags"><span class="wg-tag">Cafe</span><span class="wg-tag">Hospitality</span></div></div>
+            </div>
+
+            <div class="wg-card">
+                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">kaanch-mall.vercel.app</div></div>
+                <div class="wg-thumb"><iframe src="https://kaanch-mall.vercel.app/" loading="lazy" sandbox="allow-scripts allow-same-origin" scrolling="no" title="Kaanch Mall"></iframe><div class="wg-thumb-overlay"><a href="https://kaanch-mall.vercel.app/" target="_blank" rel="noopener noreferrer" class="wg-overlay-btn">Open Site ↗</a></div></div>
+                <div class="wg-info"><div class="wg-name">Kaanch Mall</div><div class="wg-desc">Retail &amp; shopping destination site with product showcase and brand identity.</div><div class="wg-tags"><span class="wg-tag">Retail</span><span class="wg-tag">E-commerce</span></div></div>
+            </div>
+
+            <div class="wg-card">
+                <div class="wg-browser"><div class="wg-dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><div class="wg-url">E-commerce Application</div></div>
+                <div class="wg-thumb" style="background:linear-gradient(135deg,#0d1117,#1a1a2e);display:flex;align-items:center;justify-content:center;">
+                    <div style="text-align:center;padding:1.5rem;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(0,255,204,.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        <div style="font-family:var(--font-m);font-size:.68rem;color:rgba(0,255,204,.5);margin-top:.75rem;">TFF — The Figure Factory</div>
+                    </div>
+                </div>
+                <div class="wg-info"><div class="wg-name">The Figure Factory (TFF)</div><div class="wg-desc">E-commerce app for collectible figures. Responsive UI, product browsing, scalable architecture.</div><div class="wg-tags"><span class="wg-tag">E-commerce</span><span class="wg-tag">React</span><span class="wg-tag">Node JS</span></div></div>
+            </div>
+
         </div>
     </div>
 </section>
 
-<!-- ═══ PROCESS SHOWCASE — ULTRA MODERN ═══ -->
+<!-- ═══ PROCESS SHOWCASE ═══ -->
 <section class="sec process" id="process">
     <div class="wrap">
 
         <div class="eyebrow">02.5 // Process Showcase</div>
-        <h2 class="sec-h">THE CODE BEHIND<br>THE PRODUCT.</h2>
+        <h2 class="sec-h">LIVE SITES.<br>REAL PRODUCTS.</h2>
         <p class="process-intro">
-            Watch the actual source code that powers each project type out live — and see the real rendered output update beside it in real-time.
+            Every project here is a deployed, production site — click through to explore them live in full. Select a project below.
         </p>
 
-        <!-- ── Project Selector Cards ── -->
-        <div class="ps-cards">
-
-            <button class="ps-card active" data-tab="techpanda"
-                style="--ps-color:rgba(0,212,255,.7);" aria-pressed="true">
-                <div class="ps-icon">
-                    <!-- Globe / Web icon -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                </div>
-                <div class="ps-card-info">
-                    <div class="ps-card-name">TechPanda.co.in</div>
-                    <div class="ps-card-desc">Corporate Engineering Site</div>
-                    <div class="ps-card-stack">
-                        <span class="ps-pill">HTML5</span>
-                        <span class="ps-pill">CSS Grid</span>
-                        <span class="ps-pill">Vanilla JS</span>
-                    </div>
-                </div>
+        <!-- Project tabs -->
+        <div class="ps-cards" id="psTabs">
+            <button class="ps-card active" data-sf="techpanda" aria-pressed="true">
+                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+                <span class="ps-card-name">TechPanda</span>
             </button>
-
-            <button class="ps-card" data-tab="learnsetu"
-                style="--ps-color:rgba(0,255,204,.7);" aria-pressed="false">
-                <div class="ps-icon">
-                    <!-- Layers / Cross-platform icon -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                </div>
-                <div class="ps-card-info">
-                    <div class="ps-card-name">Learn Setu</div>
-                    <div class="ps-card-desc">AI Study Platform</div>
-                    <div class="ps-card-stack">
-                        <span class="ps-pill">Flutter</span>
-                        <span class="ps-pill">Dart</span>
-                        <span class="ps-pill">Supabase</span>
-                    </div>
-                </div>
+            <button class="ps-card" data-sf="rajput" aria-pressed="false">
+                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+                <span class="ps-card-name">Rajput Mobile</span>
             </button>
-
-            <button class="ps-card" data-tab="rajput"
-                style="--ps-color:rgba(245,166,35,.7);" aria-pressed="false">
-                <div class="ps-icon">
-                    <!-- Store / Storefront icon -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                </div>
-                <div class="ps-card-info">
-                    <div class="ps-card-name">Rajput Mobile</div>
-                    <div class="ps-card-desc">Local Business Site</div>
-                    <div class="ps-card-stack">
-                        <span class="ps-pill">CSS</span>
-                        <span class="ps-pill">JavaScript</span>
-                        <span class="ps-pill">Local SEO</span>
-                    </div>
-                </div>
+            <button class="ps-card" data-sf="lagnadeep" aria-pressed="false">
+                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+                <span class="ps-card-name">Lagnadeep</span>
             </button>
-
+            <button class="ps-card" data-sf="salon" aria-pressed="false">
+                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                <span class="ps-card-name">Unisex Salon</span>
+            </button>
+            <button class="ps-card" data-sf="riccis" aria-pressed="false">
+                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></span>
+                <span class="ps-card-name">Ricci's Cafe</span>
+            </button>
+            <button class="ps-card" data-sf="friends" aria-pressed="false">
+                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                <span class="ps-card-name">Friends Caffe</span>
+            </button>
+            <button class="ps-card" data-sf="kaanch" aria-pressed="false">
+                <span class="ps-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                <span class="ps-card-name">Kaanch Mall</span>
+            </button>
         </div>
 
-        <!-- ── Editor + Preview Split ── -->
-        <div class="process-split">
-
-            <!-- LEFT: VS Code–style Editor -->
-            <div class="ce-panel">
-
-                <!-- Editor chrome: dots + file tab -->
-                <div class="ce-topbar">
-                    <div class="ce-dots">
-                        <div class="ce-dot" style="background:#ff5f57;"></div>
-                        <div class="ce-dot" style="background:#febc2e;"></div>
-                        <div class="ce-dot" style="background:#28c840;"></div>
-                    </div>
-                    <div class="ce-tabs">
-                        <div class="ce-tab ce-tab-active">
-                            <span class="ce-tab-dot"></span>
-                            <span id="ceFile">index.html</span>
-                        </div>
-                    </div>
-                    <span class="ce-lang-badge" id="ceLang">HTML</span>
+        <!-- Big browser showcase frame -->
+        <div class="showcase-frame">
+            <div class="sf-bar">
+                <div class="sf-dots">
+                    <div class="sf-dot" style="background:#ff5f57;"></div>
+                    <div class="sf-dot" style="background:#febc2e;"></div>
+                    <div class="sf-dot" style="background:#28c840;"></div>
                 </div>
-
-                <!-- Code: gutter + syntax area -->
-                <div class="ce-body">
-                    <div class="ce-gutter" id="ceGutter"></div>
-                    <div class="ce-code" id="ceCode"></div>
+                <div class="sf-url">
+                    <span class="sf-url-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#28c840" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                    <span class="sf-url-text" id="sfUrlText">techpanda.co.in</span>
                 </div>
-
-                <!-- Status bar -->
-                <div class="ce-statusbar">
-                    <div class="ce-statusbar-left">
-                        <span class="ce-status-dot"></span>
-                        <span>Live Typing</span>
-                        <span id="ceLangStatus">HTML</span>
-                    </div>
-                    <div class="ce-statusbar-right">
-                        <span>UTF-8</span>
-                        <span id="ceLineCount">Ln 1</span>
-                    </div>
+                <div class="sf-live">
+                    <div class="sf-live-dot"></div>
+                    <span>LIVE</span>
                 </div>
-
             </div>
-
-            <!-- RIGHT: Browser Preview -->
-            <div class="pv-panel">
-
-                <!-- Browser chrome -->
-                <div class="pv-topbar">
-                    <div class="ce-dots" style="flex-shrink:0;">
-                        <div class="ce-dot" style="background:#ff5f57;"></div>
-                        <div class="ce-dot" style="background:#febc2e;"></div>
-                        <div class="ce-dot" style="background:#28c840;"></div>
-                    </div>
-                    <div class="pv-url-bar">
-                        <span class="pv-url-lock">🔒</span>
-                        <span id="pvUrlText">localhost:3000</span>
-                    </div>
-                    <div class="pv-title" style="flex-shrink:0;">
-                        <div class="pv-live"></div>
-                        <span class="pv-hint">rendering</span>
-                    </div>
+            <div class="sf-viewport" id="sfViewport">
+                <div class="sf-loading" id="sfLoading">
+                    <div class="sf-spinner"></div>
+                    <span>Loading live site…</span>
                 </div>
-
-                <!-- Live render area — real iframe like Proof of Work -->
-                <div class="pv-body">
-                    <div class="pv-frame">
-                        <div class="pv-iframe-wrap" id="pvIframeWrap">
-                            <!-- Iframe injected by JS per project -->
-                            <div class="pv-loading" id="pvLoading">
-                                <div class="pv-loading-ring"></div>
-                                <span>Connecting to live site…</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <!-- iframe injected by JS -->
             </div>
+        </div>
+
+        <!-- Project meta row below frame -->
+        <div class="showcase-meta" id="sfMeta">
+            <div class="sm-info">
+                <div class="sm-title" id="sfTitle">TechPanda Engineering</div>
+                <div class="sm-desc" id="sfDesc">Full corporate site built solo in a 3-month internship. Semantic HTML5, CSS Grid/Flex, native JS — zero framework overhead, pristine Core Web Vitals.</div>
+                <div class="sm-tags" id="sfTags">
+                    <span class="sm-tag">HTML5</span><span class="sm-tag">CSS Grid</span><span class="sm-tag">Vanilla JS</span><span class="sm-tag">SEO</span>
+                </div>
+            </div>
+            <a class="sm-link" id="sfLink" href="https://techpanda.co.in" target="_blank" rel="noopener noreferrer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Open Live Site
+            </a>
         </div>
 
     </div>
@@ -2860,138 +2488,84 @@ function renderCodeFromChars(chars, count) {
     return {html, lines: lineNum+1};
 }
 
-/* Project live URLs and metadata */
-const PS_META = {
-    techpanda: { url:'https://techpanda.co.in',    display:'techpanda.co.in',   openUrl:'https://techpanda.co.in'   },
-    learnsetu:  { url:'https://rajputmobile.shop/', display:'learnsetu.app',      openUrl:'#contact'                  },
-    rajput:     { url:'https://rajputmobile.shop/', display:'rajputmobile.shop',  openUrl:'https://rajputmobile.shop' }
+/* ═════════════════════════════════════════
+   PROCESS SHOWCASE — BROWSER GALLERY JS
+═════════════════════════════════════════ */
+const SF_DATA = {
+    techpanda: { url:'https://techpanda.co.in',       display:'techpanda.co.in',          title:'TechPanda Engineering',  desc:'Full corporate site built solo in a 3-month internship. Semantic HTML5, CSS Grid, Vanilla JS — zero framework overhead, pristine Core Web Vitals.', tags:['HTML5','CSS Grid','Vanilla JS','SEO'] },
+    rajput:    { url:'https://rajputmobile.shop/',     display:'rajputmobile.shop',         title:'Rajput Mobile Care',     desc:'19+ year repair shop brought online. Conversion-first design, local SEO dominant, mobile-first UX.', tags:['Local SEO','Mobile-First','Conversion UX'] },
+    lagnadeep: { url:'https://lagnadeep.vercel.app/',  display:'lagnadeep.vercel.app',      title:'Lagnadeep',              desc:'Wedding & event platform with elegant, conversion-focused design and seamless user experience.', tags:['Events','Web Design','UI/UX'] },
+    salon:     { url:'https://unisex-salonn.vercel.app/', display:'unisex-salonn.vercel.app', title:'Unisex Salon',         desc:'Premium salon booking site with service showcase, atmosphere gallery, and modern branding.', tags:['Beauty','Local Business','Booking'] },
+    riccis:    { url:'https://ricciscafe.vercel.app/', display:'ricciscafe.vercel.app',     title:"Ricci's Cafe",           desc:'Restaurant & cafe brand site with menu presentation, atmosphere visuals, and strong local identity.', tags:['Food & Beverage','Brand','Restaurant'] },
+    friends:   { url:'https://friendscaffe.vercel.app/', display:'friendscaffe.vercel.app', title:'Friends Caffe',          desc:'Cozy cafe digital presence — menu, ambiance, events, and social discovery for a community brand.', tags:['Cafe','Hospitality','Community'] },
+    kaanch:    { url:'https://kaanch-mall.vercel.app/', display:'kaanch-mall.vercel.app',   title:'Kaanch Mall',            desc:'Retail & shopping destination with product showcase, collections, and premium brand identity.', tags:['Retail','E-commerce','Brand'] },
 };
 
-function injectPreviewIframe(tabKey) {
-    const wrap    = document.getElementById('pvIframeWrap');
-    const loading = document.getElementById('pvLoading');
-    const urlEl   = document.getElementById('pvUrlText');
-    if(!wrap) return;
+/* Showcase gallery switcher */
+let sfActive = 'techpanda';
+let sfIframe = null;
 
-    const meta = PS_META[tabKey];
-
-    // Update URL bar
-    if(urlEl) urlEl.textContent = meta.display;
-
-    // Show loading
-    if(loading) loading.classList.remove('hidden');
-
-    // Remove any existing iframe + open btn
-    wrap.querySelectorAll('iframe, .pv-open-btn').forEach(el => el.remove());
-
-    // Compute scale to fill panel
-    const panelW = wrap.offsetWidth  || 600;
-    const panelH = wrap.offsetHeight || 400;
-    const scale  = Math.min(panelW / 1400, panelH / 900);
-    wrap.style.setProperty('--pv-scale', scale.toFixed(4));
-
-    // Build iframe
+function loadShowcase(key) {
+    const data = SF_DATA[key];
+    if(!data) return;
+    sfActive = key;
+    const viewport = document.getElementById('sfViewport');
+    const loading  = document.getElementById('sfLoading');
+    const urlEl    = document.getElementById('sfUrlText');
+    const titleEl  = document.getElementById('sfTitle');
+    const descEl   = document.getElementById('sfDesc');
+    const tagsEl   = document.getElementById('sfTags');
+    const linkEl   = document.getElementById('sfLink');
+    if(!viewport) return;
+    if(urlEl)   urlEl.textContent   = data.display;
+    if(titleEl) titleEl.textContent = data.title;
+    if(descEl)  descEl.textContent  = data.desc;
+    if(tagsEl)  tagsEl.innerHTML    = data.tags.map(function(t){return '<span class="sm-tag">'+t+'</span>';}).join('');
+    if(linkEl)  linkEl.href = data.url;
+    if(loading) { loading.style.opacity='1'; loading.style.pointerEvents='all'; loading.querySelector('span').textContent='Loading live site…'; }
+    if(sfIframe) sfIframe.remove();
+    const vw = viewport.offsetWidth  || 900;
+    const vh = viewport.offsetHeight || 500;
+    const scale = Math.min(vw/1440, vh/900);
+    viewport.style.setProperty('--sf-scale', scale.toFixed(4));
     const iframe = document.createElement('iframe');
-    iframe.src    = meta.url;
-    iframe.title  = 'Live preview of ' + meta.display;
-    iframe.setAttribute('loading', 'lazy');
-    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-    iframe.setAttribute('scrolling', 'no');
-    iframe.setAttribute('aria-label', meta.display + ' live preview');
-
-    // Show on load
-    iframe.addEventListener('load', () => {
-        iframe.classList.add('loaded');
-        if(loading) loading.classList.add('hidden');
+    iframe.src   = data.url;
+    iframe.title = data.title + ' live preview';
+    iframe.setAttribute('loading','lazy');
+    iframe.setAttribute('sandbox','allow-scripts allow-same-origin');
+    iframe.setAttribute('scrolling','no');
+    iframe.addEventListener('load', function() {
+        iframe.classList.add('sf-loaded');
+        if(loading) { loading.style.opacity='0'; loading.style.pointerEvents='none'; }
     });
-
-    // Fallback if load fails / blocked
-    iframe.addEventListener('error', () => {
-        if(loading) {
-            loading.querySelector('span').textContent = 'Preview blocked by site policy';
-            loading.querySelector('.pv-loading-ring').style.display = 'none';
-        }
+    iframe.addEventListener('error', function() {
+        if(loading) loading.querySelector('span').textContent='Preview not available';
     });
-
-    wrap.appendChild(iframe);
-
-    // Open-site button
-    const btn = document.createElement('a');
-    btn.className = 'pv-open-btn';
-    btn.href = meta.openUrl;
-    if(!meta.openUrl.startsWith('#')) { btn.target = '_blank'; btn.rel = 'noopener noreferrer'; }
-    btn.innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Open Live Site`;
-    wrap.appendChild(btn);
+    viewport.appendChild(iframe);
+    sfIframe = iframe;
 }
 
-function startCodeTyping(tabKey) {
-    const proj = PROJECTS[tabKey];
-    if(!proj) return;
-    cancelAnimationFrame(ceTypingRaf);
-
-    // Update editor chrome
-    const fileEl   = document.getElementById('ceFile');
-    const langEl   = document.getElementById('ceLang');
-    const langStat = document.getElementById('ceLangStatus');
-    if(fileEl)   fileEl.textContent   = proj.file;
-    if(langEl)   langEl.textContent   = proj.lang;
-    if(langStat) langStat.textContent = proj.lang;
-
-    // Inject real live iframe preview
-    injectPreviewIframe(tabKey);
-
-    // Build and start typing
-    ceTotalText = buildFlatChars(proj.code);
-    ceCharIdx   = 0;
-    const ceCodeEl    = document.getElementById('ceCode');
-    const lineCountEl = document.getElementById('ceLineCount');
-    if(ceCodeEl) ceCodeEl.innerHTML = '';
-
-    // Render 3 chars per frame for fast but smooth effect
-    const BATCH = 3;
-    let lastTs = 0;
-
-    function tick(ts) {
-        if(ts - lastTs >= 16) {
-            for(let b = 0; b < BATCH; b++) {
-                if(ceCharIdx < ceTotalText.length) ceCharIdx++;
-            }
-            const result = renderCodeFromChars(ceTotalText, ceCharIdx);
-            if(ceCodeEl) {
-                ceCodeEl.innerHTML = result.html;
-                ceCodeEl.scrollTop = ceCodeEl.scrollHeight;
-            }
-            renderGutter(result.lines);
-            if(lineCountEl) lineCountEl.textContent = 'Ln ' + result.lines;
-            lastTs = ts;
-        }
-        if(ceCharIdx < ceTotalText.length) ceTypingRaf = requestAnimationFrame(tick);
-    }
-    ceTypingRaf = requestAnimationFrame(tick);
-}
-
-// ps-card project switcher
-document.querySelectorAll('.ps-card').forEach(card => {
-    card.addEventListener('click', () => {
-        document.querySelectorAll('.ps-card').forEach(c => {
-            c.classList.remove('active');
-            c.setAttribute('aria-pressed','false');
-        });
-        card.classList.add('active');
-        card.setAttribute('aria-pressed','true');
-        ceActiveTab = card.dataset.tab;
-        startCodeTyping(ceActiveTab);
+document.querySelectorAll('[data-sf]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-sf]').forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed','true');
+        loadShowcase(btn.dataset.sf);
     });
 });
 
-// Trigger when process section scrolls into view
-const processObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-        if(e.isIntersecting) { startCodeTyping(ceActiveTab); processObs.disconnect(); }
-    });
-}, {threshold: 0.15});
+const processObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e){ if(e.isIntersecting){ loadShowcase(sfActive); processObs.disconnect(); } });
+}, {threshold:0.15});
 const processEl = document.getElementById('process');
 if(processEl) processObs.observe(processEl);
+
+window.addEventListener('resize', function() {
+    var viewport = document.getElementById('sfViewport');
+    if(!viewport || !sfIframe) return;
+    var scale = Math.min(viewport.offsetWidth/1440, viewport.offsetHeight/900);
+    viewport.style.setProperty('--sf-scale', scale.toFixed(4));
+});
 
 /* ═════════════════════════════════════════════════════════
    AI CHAT ASSISTANT
@@ -3130,20 +2704,16 @@ document.addEventListener('DOMContentLoaded', () => {
     ───────────────────────────────────────────────────── */
     let scrollY  = 0;
     let targetY  = 0;
-    // Smoothing: 0.082 = very silky, 0.11 = responsive
-    // Lower on mobile (touch has its own momentum glide)
-    const EASE_DESKTOP = 0.088;
-    const EASE_TOUCH   = 0.10;
-    let   EASE         = EASE_DESKTOP;
-    let   running      = false;
-    let   lastRAF      = 0;
-    let   isTouching   = false;
+    // Smoothing factor — 0.09 = buttery, 0.14 = snappier
+    const EASE   = 0.092;
+    let running  = false;
+    let lastRAF  = 0;
 
     const html = document.documentElement;
     html.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
 
-    // Wrap all body children in one fixed GPU layer
+    // Wrap all body children in one GPU layer
     const scroller = document.createElement('div');
     scroller.id = 'ssc';
     scroller.style.cssText =
@@ -3152,33 +2722,19 @@ document.addEventListener('DOMContentLoaded', () => {
     while(document.body.firstChild) scroller.appendChild(document.body.firstChild);
     document.body.appendChild(scroller);
 
-    // Height sentinel — gives body a real scroll height so mobile
-    // address bars and overscroll work correctly
+    // Height proxy — lets native scrollbar drive page height
     const sentinel = document.createElement('div');
     sentinel.id = 'ssen';
-    sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;pointer-events:none;';
     document.body.appendChild(sentinel);
 
-    // KEY FIX: measure scroller's NATURAL height via offsetHeight (not scrollHeight)
-    // scrollHeight includes overflow which the fixed scroller doesn't have
-    function refreshH() {
-        // Force layout in case transforms haven't settled
-        const h = scroller.offsetHeight;
-        sentinel.style.height = h + 'px';
-        document.body.style.minHeight = h + 'px';
-    }
+    const refreshH = () => { sentinel.style.height = scroller.scrollHeight + 'px'; };
     refreshH();
-
-    // Re-measure when content changes (lazy images, section toggles, resize)
-    const ro = new ResizeObserver(() => {
-        // rAF to let layout settle before measuring
-        requestAnimationFrame(refreshH);
-    });
+    // Re-measure on content resize (images load, sections expand)
+    const ro = new ResizeObserver(refreshH);
     ro.observe(scroller);
 
     const clamp = (v,lo,hi) => v < lo ? lo : v > hi ? hi : v;
-    // Use offsetHeight (natural height) not scrollHeight (includes overflow)
-    const maxY  = () => Math.max(0, scroller.offsetHeight - innerHeight);
+    const maxY  = () => scroller.scrollHeight - innerHeight;
 
     // Wheel — normalize delta across devices/modes
     window.addEventListener('wheel', e => {
@@ -3189,38 +2745,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if(!running) { running = true; rafLoop(performance.now()); }
     }, { passive: true });
 
-    // Touch — adaptive sensitivity + momentum glide
-    let tsy = 0, lastTouchY = 0, touchVel = 0, glideRaf = 0;
-
+    // Touch — with momentum-style sensitivity
+    let tsy = 0, lastTouchY = 0, touchVel = 0;
     window.addEventListener('touchstart', e => {
-        isTouching = true;
-        EASE = EASE_TOUCH;
         tsy = lastTouchY = e.touches[0].clientY;
         touchVel = 0;
-        cancelAnimationFrame(glideRaf); // kill any previous glide
     }, { passive: true });
-
     window.addEventListener('touchmove', e => {
         const cy = e.touches[0].clientY;
         const dy = lastTouchY - cy;
-        touchVel  = dy * 0.7 + touchVel * 0.3; // weighted average for smoother feel
+        touchVel = dy;
         lastTouchY = cy;
-        targetY = clamp(targetY + dy * 1.5, 0, maxY());
+        targetY = clamp(targetY + dy * 1.4, 0, maxY());
         if(!running) { running = true; rafLoop(performance.now()); }
     }, { passive: true });
-
+    // Momentum glide after lift
     window.addEventListener('touchend', () => {
-        isTouching = false;
-        EASE = EASE_DESKTOP;
-        // Momentum glide
-        if(Math.abs(touchVel) > 0.5) {
-            (function glide() {
-                touchVel *= 0.88; // decay
-                if(Math.abs(touchVel) < 0.3) { touchVel = 0; return; }
+        if(Math.abs(touchVel) > 1) {
+            const glide = () => {
+                touchVel *= 0.92;
+                if(Math.abs(touchVel) < 0.5) return;
                 targetY = clamp(targetY + touchVel, 0, maxY());
                 if(!running) { running = true; rafLoop(performance.now()); }
-                glideRaf = requestAnimationFrame(glide);
-            })();
+                requestAnimationFrame(glide);
+            };
+            requestAnimationFrame(glide);
         }
     }, { passive: true });
 
@@ -3237,23 +2786,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     function rafLoop(ts) {
-        // Cap dt so a tab-switch or lag spike never causes a jump
-        const dt = ts > 0 ? Math.min(ts - lastRAF, 40) : 16.667;
+        const dt = Math.min(ts - lastRAF, 50); // cap delta to avoid jumps after tab-switch
         lastRAF = ts;
-
-        // Frame-rate independent lerp factor
+        // Frame-rate independent lerp: lerp = 1 - (1 - factor)^(dt/16.67)
         const lerpFactor = 1 - Math.pow(1 - EASE, dt / 16.667);
         scrollY += (targetY - scrollY) * lerpFactor;
 
-        // Snap when delta is sub-pixel
-        if(Math.abs(targetY - scrollY) < 0.06) {
+        const diff = Math.abs(targetY - scrollY);
+        if(diff < 0.04) {
             scrollY = targetY;
             running = false;
             scroller.style.transform = `translate3d(0,${-scrollY}px,0)`;
             ScrollTrigger.update();
-            return; // stop loop — only restarts on next user input
+            return;
         }
-
         scroller.style.transform = `translate3d(0,${-scrollY}px,0)`;
         ScrollTrigger.update();
         requestAnimationFrame(rafLoop);
@@ -3300,17 +2846,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let resizeTimer;
     window.addEventListener('resize', () => {
         refreshH();
-        // After resize clamp scroll position so it stays valid
-        const max = maxY();
-        targetY = clamp(targetY, 0, max);
-        scrollY = clamp(scrollY, 0, max);
-        scroller.style.transform = `translate3d(0,${-scrollY}px,0)`;
-        // Debounce GSAP refresh
+        // Debounce GSAP refresh to avoid mid-resize thrash
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            refreshH();
-            ScrollTrigger.refresh();
-        }, 150);
+        resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 120);
     });
 
     /* ─────────────────────────────────────────────────────
